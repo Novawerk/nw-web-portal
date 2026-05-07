@@ -1,0 +1,41 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-background: #f5f2ec;
+  --color-foreground: #14110d;
+  --color-muted: #6b6358;
+  --color-muted-foreground: #8a8275;
+  --color-border: #e0d9cb;
+  --color-surface: #ebe6dc;
+  --color-card: #ffffff;
+  --color-accent: #ff5722;
+  --color-accent-foreground: #ffffff;
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-instrument-serif);
+}
+
+@layer base {
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-accent-foreground);
+  }
+
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
