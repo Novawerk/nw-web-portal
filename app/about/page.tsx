@@ -1,4 +1,5 @@
 import { Container } from "@/components/layout/container";
+import { Reveal } from "@/components/motion/reveal";
 
 const principles = [
   {
@@ -33,19 +34,25 @@ export default function AboutPage() {
     <>
       <section className="pt-20 pb-24 md:pt-32">
         <Container>
-          <span className="text-xs uppercase tracking-[0.2em] text-muted">
-            About
-          </span>
-          <h1 className="mt-4 font-display text-5xl leading-[0.95] md:text-7xl">
-            Why NovaWerk{" "}
-            <span className="italic text-accent">exists</span>.
-          </h1>
-          <p className="mt-12 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
-            We are an open, non-profit community focused on creating meaningful
-            social impact through collaboration, creativity, and action. Great
-            ideas should not remain as concepts — we exist to help people turn
-            them into reality.
-          </p>
+          <Reveal>
+            <span className="text-xs uppercase tracking-[0.2em] text-muted">
+              About
+            </span>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h1 className="mt-4 font-display text-5xl leading-[0.95] md:text-7xl">
+              Why NovaWerk{" "}
+              <span className="italic text-accent">exists</span>.
+            </h1>
+          </Reveal>
+          <Reveal delay={0.25}>
+            <p className="mt-12 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
+              We are an open, non-profit community focused on creating
+              meaningful social impact through collaboration, creativity, and
+              action. Great ideas should not remain as concepts — we exist to
+              help people turn them into reality.
+            </p>
+          </Reveal>
         </Container>
       </section>
 
@@ -102,15 +109,17 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="grid gap-px overflow-hidden rounded-2xl bg-border md:grid-cols-2">
-            {principles.map((p) => (
-              <article
+            {principles.map((p, i) => (
+              <Reveal
                 key={p.num}
+                as="article"
+                delay={i * 0.08}
                 className="flex flex-col gap-4 bg-background p-8 md:p-10"
               >
                 <span className="font-mono text-xs text-muted">{p.num}</span>
                 <h3 className="font-display text-2xl md:text-3xl">{p.title}</h3>
                 <p className="text-muted leading-relaxed">{p.body}</p>
-              </article>
+              </Reveal>
             ))}
           </div>
         </Container>

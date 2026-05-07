@@ -1,6 +1,7 @@
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Reveal } from "@/components/motion/reveal";
 
 const involve = [
   {
@@ -26,34 +27,42 @@ export default function CommunityPage() {
     <>
       <section className="pt-20 pb-16 md:pt-32">
         <Container>
-          <span className="text-xs uppercase tracking-[0.2em] text-muted">
-            Community
-          </span>
-          <h1 className="mt-4 font-display text-5xl leading-[0.95] md:text-7xl">
-            Build with{" "}
-            <span className="italic text-accent">us</span>.
-          </h1>
-          <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
-            NovaWerk is open. If you have a meaningful idea, want to learn by
-            building, or want to contribute to projects that matter — there&apos;s
-            a place for you here.
-          </p>
+          <Reveal>
+            <span className="text-xs uppercase tracking-[0.2em] text-muted">
+              Community
+            </span>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h1 className="mt-4 font-display text-5xl leading-[0.95] md:text-7xl">
+              Build with{" "}
+              <span className="italic text-accent">us</span>.
+            </h1>
+          </Reveal>
+          <Reveal delay={0.25}>
+            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
+              NovaWerk is open. If you have a meaningful idea, want to learn by
+              building, or want to contribute to projects that matter —
+              there&apos;s a place for you here.
+            </p>
+          </Reveal>
         </Container>
       </section>
 
       <section className="border-t border-border/60 py-24">
         <Container>
           <div className="grid gap-px overflow-hidden rounded-2xl bg-border md:grid-cols-2">
-            {involve.map((item) => (
-              <article
+            {involve.map((item, i) => (
+              <Reveal
                 key={item.title}
+                as="article"
+                delay={i * 0.08}
                 className="flex flex-col gap-3 bg-background p-8 md:p-10"
               >
                 <h2 className="font-display text-2xl md:text-3xl">
                   {item.title}
                 </h2>
                 <p className="text-muted leading-relaxed">{item.body}</p>
-              </article>
+              </Reveal>
             ))}
           </div>
         </Container>
