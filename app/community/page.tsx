@@ -1,7 +1,7 @@
 import { Container } from "@/components/layout/container";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
+import { ContactForm } from "@/components/forms/contact-form";
+import { NewsletterForm } from "@/components/forms/newsletter-form";
 
 const involve = [
   {
@@ -89,13 +89,7 @@ export default function CommunityPage() {
             </div>
             <div className="md:col-span-6 md:col-start-7">
               <div className="rounded-2xl border border-border bg-card p-8 md:p-10">
-                <p className="font-display text-xl text-muted">
-                  Contact form coming in Phase 4 of the build.
-                </p>
-                <p className="mt-3 text-sm text-muted">
-                  Will collect: name, email, role/background, why you want to
-                  join, interests, and optional links.
-                </p>
+                <ContactForm />
               </div>
             </div>
           </div>
@@ -112,10 +106,8 @@ export default function CommunityPage() {
               Stay close to what we&apos;re{" "}
               <span className="italic text-accent">making</span>.
             </h2>
-            <div className="mt-8">
-              <Button href="/community#contact" variant="accent">
-                Join the list <ArrowRight className="size-4" />
-              </Button>
+            <div className="mt-8 max-w-md">
+              <NewsletterForm />
             </div>
           </div>
         </Container>
