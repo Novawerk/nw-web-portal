@@ -30,7 +30,10 @@ export default buildConfig({
   },
   db: postgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI || "",
+      // Accept either DATABASE_URI (Payload convention) or DATABASE_URL
+      // (Vercel/Neon/most platforms). Same string, different env name.
+      connectionString:
+        process.env.DATABASE_URI || process.env.DATABASE_URL || "",
     },
   }),
   sharp,
