@@ -11,6 +11,8 @@ import { Media } from "./collections/Media";
 import { BlogPosts } from "./collections/BlogPosts";
 import { ContactSubmissions } from "./collections/ContactSubmissions";
 import { NewsletterSubscribers } from "./collections/NewsletterSubscribers";
+import { PortfolioItems } from "./collections/PortfolioItems";
+import { TeamMembers } from "./collections/TeamMembers";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -31,6 +33,8 @@ export default buildConfig({
     BlogPosts,
     ContactSubmissions,
     NewsletterSubscribers,
+    PortfolioItems,
+    TeamMembers,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

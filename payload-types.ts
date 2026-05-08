@@ -72,6 +72,8 @@ export interface Config {
     'blog-posts': BlogPost;
     'contact-submissions': ContactSubmission;
     'newsletter-subscribers': NewsletterSubscriber;
+    'portfolio-items': PortfolioItem;
+    'team-members': TeamMember;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +86,8 @@ export interface Config {
     'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
     'contact-submissions': ContactSubmissionsSelect<false> | ContactSubmissionsSelect<true>;
     'newsletter-subscribers': NewsletterSubscribersSelect<false> | NewsletterSubscribersSelect<true>;
+    'portfolio-items': PortfolioItemsSelect<false> | PortfolioItemsSelect<true>;
+    'team-members': TeamMembersSelect<false> | TeamMembersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -252,6 +256,73 @@ export interface NewsletterSubscriber {
   createdAt: string;
 }
 /**
+ * Projects shown on the /portfolio page and home featured grid.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "portfolio-items".
+ */
+export interface PortfolioItem {
+  id: number;
+  title: string;
+  slug: string;
+  /**
+   * Short label, e.g. "App", "Project", "Tool".
+   */
+  tag: string;
+  /**
+   * 1–2 sentence pitch shown on cards.
+   */
+  description: string;
+  status: 'planning' | 'building' | 'launching' | 'launched' | 'archived';
+  /**
+   * Optional outbound URL (the live app, GitHub, etc.).
+   */
+  link?: string | null;
+  coverImage?: (number | null) | Media;
+  /**
+   * Show in the home page "Currently building" grid.
+   */
+  featured?: boolean | null;
+  /**
+   * Lower = shown first. Defaults to 100.
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * People shown on the About page team section.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team-members".
+ */
+export interface TeamMember {
+  id: number;
+  name: string;
+  /**
+   * e.g. "Co-founder", "Designer", "Researcher".
+   */
+  role: string;
+  /**
+   * Short paragraph about what they do at NovaWerk.
+   */
+  bio?: string | null;
+  photo?: (number | null) | Media;
+  links?:
+    | {
+        label: string;
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Lower = shown first. Defaults to 100.
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -294,6 +365,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'newsletter-subscribers';
         value: number | NewsletterSubscriber;
+      } | null)
+    | ({
+        relationTo: 'portfolio-items';
+        value: number | PortfolioItem;
+      } | null)
+    | ({
+        relationTo: 'team-members';
+        value: number | TeamMember;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -424,6 +503,43 @@ export interface NewsletterSubscribersSelect<T extends boolean = true> {
   email?: T;
   subscribed?: T;
   source?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "portfolio-items_select".
+ */
+export interface PortfolioItemsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  tag?: T;
+  description?: T;
+  status?: T;
+  link?: T;
+  coverImage?: T;
+  featured?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "team-members_select".
+ */
+export interface TeamMembersSelect<T extends boolean = true> {
+  name?: T;
+  role?: T;
+  bio?: T;
+  photo?: T;
+  links?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        id?: T;
+      };
+  order?: T;
   updatedAt?: T;
   createdAt?: T;
 }

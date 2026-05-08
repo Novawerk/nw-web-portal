@@ -4,8 +4,13 @@ import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/motion/reveal";
 import { AnimatedSlogan } from "@/components/motion/animated-slogan";
+import { getFeaturedPortfolioItems } from "@/lib/portfolio";
 
-export default function Home() {
+// Revalidate every 5 minutes so CMS edits show up without a redeploy.
+export const revalidate = 300;
+
+export default async function Home() {
+  const featured = await getFeaturedPortfolioItems();
   return (
     <>
       <section className="relative pt-20 pb-32 md:pt-32 md:pb-48">
@@ -116,20 +121,19 @@ export default function Home() {
             </div>
           </Reveal>
           <div className="mt-12 grid gap-6 md:grid-cols-2">
-            <Reveal as="article" delay={0.1}>
-              <ProjectCard
-                tag="Apps"
-                title="Restaurant Map"
-                description="A community-curated guide to eating well, intentionally."
-              />
-            </Reveal>
-            <Reveal as="article" delay={0.2}>
-              <ProjectCard
-                tag="Apps"
-                title="YiMa App"
-                description="Bringing structure to thoughtful daily practice."
-              />
-            </Reveal>
+            {featured.map((p, i) => (
+              <Reveal
+                key={p.slug}
+                as="article"
+                delay={(i + 1) * 0.1}
+              >
+                <ProjectCard
+                  tag={p.tag}
+                  title={p.title}
+                  description={p.description}
+                />
+              </Reveal>
+            ))}
           </div>
         </Container>
       </section>

@@ -1,24 +1,22 @@
+import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
+import { getAllPortfolioItems } from "@/lib/portfolio";
 
-const projects = [
-  {
-    tag: "App",
-    title: "Restaurant Map",
-    description:
-      "A community-curated guide to eating well, intentionally.",
-    status: "Launching",
-  },
-  {
-    tag: "App",
-    title: "YiMa App",
-    description: "Bringing structure to thoughtful daily practice.",
-    status: "Launching",
-  },
-];
+const statusLabel: Record<string, string> = {
+  planning: "Planning",
+  building: "Building",
+  launching: "Launching",
+  launched: "Launched",
+};
 
-export default function PortfolioPage() {
+// Revalidate every 5 minutes so CMS edits show up without a redeploy.
+export const revalidate = 300;
+
+export default async function PortfolioPage() {
+  const projects = await getAllPortfolioItems();
+
   return (
     <>
       <section className="pt-20 pb-16 md:pt-32">
@@ -45,36 +43,61 @@ export default function PortfolioPage() {
 
       <section className="py-16">
         <Container>
-          <div className="grid gap-6 md:grid-cols-2">
-            {projects.map((p, i) => (
-              <Reveal
-                key={p.title}
-                as="article"
-                delay={i * 0.1}
-                className="group relative flex aspect-[4/3] flex-col justify-between overflow-hidden rounded-2xl border border-border bg-card p-8 transition-all duration-500 hover:scale-[1.01] hover:border-foreground/20 md:p-10"
-              >
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-foreground/[0.04] to-transparent transition-opacity duration-500 group-hover:opacity-0" />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-accent/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                <div className="relative flex items-start justify-between">
-                  <span className="text-xs uppercase tracking-[0.2em] text-muted">
-                    {p.tag}
-                  </span>
-                  <span className="rounded-full border border-border px-3 py-1 text-xs text-muted">
-                    {p.status}
-                  </span>
-                </div>
-                <div className="relative">
-                  <h3 className="font-display text-3xl md:text-4xl">
-                    {p.title}
-                  </h3>
-                  <p className="mt-2 text-muted">{p.description}</p>
-                  <div className="mt-6 flex items-center gap-2 text-sm text-foreground transition-transform duration-500 group-hover:translate-x-1">
-                    Learn more <ArrowUpRight className="size-4" />
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          {projects.length === 0 ? (
+            <div className="rounded-2xl border border-border bg-card p-10 text-center md:p-16">
+              <p className="font-display text-2xl text-muted md:text-3xl">
+                No projects yet — check back soon.
+              </p>
+            </div>
+          ) : (
+            <div className="grid gap-6 md:grid-cols-2">
+              {projects.map((p, i) => {
+                const card = (
+                  <>
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-foreground/[0.04] to-transparent transition-opacity duration-500 group-hover:opacity-0" />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-accent/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    <div className="relative flex items-start justify-between">
+                      <span className="text-xs uppercase tracking-[0.2em] text-muted">
+                        {p.tag}
+                      </span>
+                      <span className="rounded-full border border-border px-3 py-1 text-xs text-muted">
+                        {statusLabel[p.status] ?? p.status}
+                      </span>
+                    </div>
+                    <div className="relative">
+                      <h3 className="font-display text-3xl md:text-4xl">
+                        {p.title}
+                      </h3>
+                      <p className="mt-2 text-muted">{p.description}</p>
+                      {p.link && (
+                        <div className="mt-6 flex items-center gap-2 text-sm text-foreground transition-transform duration-500 group-hover:translate-x-1">
+                          Visit <ArrowUpRight className="size-4" />
+                        </div>
+                      )}
+                    </div>
+                  </>
+                );
+                const className =
+                  "group relative flex aspect-[4/3] flex-col justify-between overflow-hidden rounded-2xl border border-border bg-card p-8 transition-all duration-500 hover:scale-[1.01] hover:border-foreground/20 md:p-10";
+                return (
+                  <Reveal key={p.slug} as="article" delay={i * 0.1}>
+                    {p.link ? (
+                      <Link
+                        href={p.link}
+                        className={className}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {card}
+                      </Link>
+                    ) : (
+                      <div className={className}>{card}</div>
+                    )}
+                  </Reveal>
+                );
+              })}
+            </div>
+          )}
         </Container>
       </section>
     </>
