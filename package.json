@@ -14,7 +14,8 @@
     "migrate": "payload migrate",
     "migrate:create": "payload migrate:create",
     "migrate:blog": "tsx --env-file=.env.local scripts/migrate-blog.ts",
-    "migrate:portfolio": "tsx --env-file=.env.local scripts/migrate-portfolio.ts"
+    "migrate:portfolio": "tsx --env-file=.env.local scripts/migrate-portfolio.ts",
+    "backfill:user-roles": "tsx --env-file=.env.local scripts/backfill-user-roles.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

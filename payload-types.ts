@@ -134,6 +134,10 @@ export interface UserAuthOperations {
 export interface User {
   id: number;
   name?: string | null;
+  /**
+   * Admin: full access. Editor: can manage content but not users or roles.
+   */
+  roles?: ('admin' | 'editor')[] | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -210,7 +214,7 @@ export interface BlogPost {
   createdAt: string;
 }
 /**
- * Inbound applications submitted from /community. Read-only for non-admins.
+ * Inbound applications submitted from /community. Admin-only — these contain personal data.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contact-submissions".
@@ -239,7 +243,7 @@ export interface ContactSubmission {
   createdAt: string;
 }
 /**
- * Newsletter signups from /community. Mark unsubscribed instead of deleting.
+ * Newsletter signups from /community. Admin-only — contains email addresses. Mark unsubscribed instead of deleting.
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "newsletter-subscribers".
@@ -422,6 +426,7 @@ export interface PayloadMigration {
  */
 export interface UsersSelect<T extends boolean = true> {
   name?: T;
+  roles?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

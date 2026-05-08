@@ -1,4 +1,5 @@
 import type { CollectionConfig } from "payload";
+import { isAdmin } from "../lib/access";
 
 export const NewsletterSubscribers: CollectionConfig = {
   slug: "newsletter-subscribers",
@@ -6,13 +7,13 @@ export const NewsletterSubscribers: CollectionConfig = {
     useAsTitle: "email",
     defaultColumns: ["email", "subscribed", "source", "createdAt"],
     description:
-      "Newsletter signups from /community. Mark unsubscribed instead of deleting.",
+      "Newsletter signups from /community. Admin-only — contains email addresses. Mark unsubscribed instead of deleting.",
   },
   access: {
     create: () => true,
-    read: ({ req }) => Boolean(req.user),
-    update: ({ req }) => Boolean(req.user),
-    delete: ({ req }) => Boolean(req.user),
+    read: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
   },
   fields: [
     {

@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { interestOptions } from "../lib/schemas";
+import { isAdmin } from "../lib/access";
 
 export const ContactSubmissions: CollectionConfig = {
   slug: "contact-submissions",
@@ -7,13 +8,13 @@ export const ContactSubmissions: CollectionConfig = {
     useAsTitle: "name",
     defaultColumns: ["name", "email", "status", "createdAt"],
     description:
-      "Inbound applications submitted from /community. Read-only for non-admins.",
+      "Inbound applications submitted from /community. Admin-only — these contain personal data.",
   },
   access: {
     create: () => true,
-    read: ({ req }) => Boolean(req.user),
-    update: ({ req }) => Boolean(req.user),
-    delete: ({ req }) => Boolean(req.user),
+    read: isAdmin,
+    update: isAdmin,
+    delete: isAdmin,
   },
   fields: [
     {
