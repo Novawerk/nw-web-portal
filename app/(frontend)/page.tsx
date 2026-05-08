@@ -27,9 +27,9 @@ export default async function Home() {
               <AnimatedSlogan />
               <Reveal delay={0.55}>
                 <p className="mt-12 max-w-xl text-lg leading-relaxed text-muted md:text-xl">
-                  NovaWerk is an open, non-profit community turning meaningful
-                  ideas into real-world impact — through collaboration,
-                  creativity, and action.
+                  NovaWerk is an open, non-profit community hub focused on
+                  creating real positive change in society — through
+                  collaboration, creativity, and action.
                 </p>
               </Reveal>
               <Reveal delay={0.7}>
@@ -55,7 +55,7 @@ export default async function Home() {
                 002 / About
               </span>
               <h2 className="mt-4 font-display text-4xl leading-tight md:text-5xl">
-                Where ideas connect through meaningful movement.
+                From ideas to <span className="italic">positive change</span>.
               </h2>
             </Reveal>
             <Reveal
@@ -64,14 +64,12 @@ export default async function Home() {
               className="space-y-6 text-lg leading-relaxed text-muted md:col-span-7 md:col-start-6"
             >
               <p>
-                Great ideas should not remain as concepts. Through real
-                projects, shared learning, and practical collaboration, we
-                help people turn meaningful ideas into reality.
+                We believe great ideas should not remain as concepts.
               </p>
               <p>
-                NovaWerk is not only a place to discuss ideas — it is a space
-                where people come together to learn, build, and create
-                positive impact together.
+                Positive change happens when people come together to build,
+                learn, and collaborate on real projects that turn ideas into
+                reality.
               </p>
             </Reveal>
           </div>
@@ -86,8 +84,8 @@ export default async function Home() {
                 003 / Vision
               </span>
               <p className="mt-6 font-display text-3xl leading-tight md:text-4xl">
-                To build an open platform that empowers people to transform
-                meaningful ideas into real-world impact.
+                To build an open space that empowers people to transform
+                meaningful ideas into positive change for society.
               </p>
             </Reveal>
             <Reveal as="div" delay={0.15}>
@@ -95,7 +93,7 @@ export default async function Home() {
                 004 / Mission
               </span>
               <p className="mt-6 font-display text-3xl leading-tight md:text-4xl">
-                Lower the barriers of innovation —{" "}
+                Lower the barriers to creating positive change —{" "}
                 <span className="italic">together</span>.
               </p>
             </Reveal>
@@ -149,7 +147,7 @@ export default async function Home() {
               <h2 className="mt-6 max-w-3xl font-display text-4xl leading-tight md:text-6xl">
                 Have a meaningful idea? <br />
                 <span className="italic text-accent">
-                  Let&apos;s build it together.
+                  Let&apos;s make it real.
                 </span>
               </h2>
               <div className="mt-10 flex flex-wrap gap-4">

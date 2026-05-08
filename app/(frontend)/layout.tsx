@@ -18,9 +18,9 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "NovaWerk — Inspire Ideas. Enable Action. Create Impact.",
+  title: "NovaWerk — Not profitable, but meaningful.",
   description:
-    "An open, non-profit community turning meaningful ideas into real-world impact through collaboration, creativity, and action.",
+    "An open, non-profit community hub focused on creating real positive change in society through collaboration, creativity, and action.",
 };
 
 export default function RootLayout({

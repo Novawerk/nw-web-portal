@@ -9,9 +9,8 @@ export function Footer() {
           <div className="grid gap-12 md:grid-cols-2 md:items-end">
             <div>
               <p className="font-display text-4xl leading-[1.05] md:text-6xl">
-                Inspire Ideas. <br />
-                Enable Action. <br />
-                <span className="italic text-accent">Create Impact.</span>
+                Not profitable, <br />
+                <span className="italic text-accent">but meaningful.</span>
               </p>
             </div>
             <div className="flex flex-col items-start gap-4 md:items-end">

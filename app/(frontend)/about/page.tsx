@@ -4,28 +4,18 @@ import { Reveal } from "@/components/motion/reveal";
 const principles = [
   {
     num: "01",
-    title: "Innovation with Purpose",
-    body: "We encourage innovation that creates genuine social value. Rather than focusing on quick replication or short-term market trends, we care more about long-term impact, problem-solving, and meaningful contributions.",
+    title: "Purposeful Innovation",
+    body: "We believe innovation should create real positive change for people and society. Rather than following short-term trends or simple replication, we value meaningful ideas, thoughtful execution, and long-term contribution through real action.",
   },
   {
     num: "02",
-    title: "Open & Collaborative",
-    body: "NovaWerk is an open community. We welcome individuals who share our vision and are willing to contribute toward our mission. Regardless of background, experience, or skill level, we believe collaboration amplifies the value everyone can create.",
+    title: "Build, Learn, Together",
+    body: "NovaWerk is an open community where people come together to learn, build, and grow through practical collaboration and real projects. We welcome individuals from different backgrounds, experiences, and skill levels who share a desire to create positive change together.",
   },
   {
     num: "03",
-    title: "Action Over Talk",
-    body: "Ideas matter, but execution creates impact. We value meaningful action, experimentation, and learning through doing.",
-  },
-  {
-    num: "04",
-    title: "Learn Through Building",
-    body: "We believe the most effective way to grow is through real-world practice. NovaWerk is not only a project incubator, but also a collaborative environment for continuous learning and improvement.",
-  },
-  {
-    num: "05",
-    title: "Do No Evil",
-    body: "We believe technology and innovation should serve people and society positively. We reject manipulation, harmful practices, exploitation, or anything that goes against public good.",
+    title: "Responsibility for Positive Change",
+    body: "We believe everyone shares a responsibility to contribute positively to society through their actions, ideas, and participation. Positive change begins when people choose to care, contribute, and take responsibility instead of remaining indifferent or inactive.",
   },
 ];
 
@@ -47,10 +37,10 @@ export default function AboutPage() {
           </Reveal>
           <Reveal delay={0.25}>
             <p className="mt-12 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
-              We are an open, non-profit community focused on creating
-              meaningful social impact through collaboration, creativity, and
-              action. Great ideas should not remain as concepts — we exist to
-              help people turn them into reality.
+              We are an open, non-profit community hub focused on creating
+              real positive change in society. Great ideas should not remain
+              as concepts — and positive change happens when people come
+              together to build, learn, and collaborate.
             </p>
           </Reveal>
         </Container>
@@ -68,7 +58,7 @@ export default function AboutPage() {
               </h2>
             </div>
             <div className="space-y-4 text-lg leading-relaxed text-muted md:col-span-7 md:col-start-6">
-              <p>NovaWerk exists to lower the barriers of innovation — helping individuals and groups:</p>
+              <p>NovaWerk exists to lower the barriers to creating positive change — helping people:</p>
               <ul className="space-y-3 pl-0">
                 <li className="flex gap-4 border-t border-border/60 pt-3">
                   <span className="text-muted-foreground">→</span>
@@ -76,11 +66,11 @@ export default function AboutPage() {
                 </li>
                 <li className="flex gap-4 border-t border-border/60 pt-3">
                   <span className="text-muted-foreground">→</span>
-                  <span>break visions into executable scopes</span>
+                  <span>break ideas into actionable scopes</span>
                 </li>
                 <li className="flex gap-4 border-t border-border/60 pt-3">
                   <span className="text-muted-foreground">→</span>
-                  <span>collaborate with like-minded builders</span>
+                  <span>collaborate with like-minded people</span>
                 </li>
                 <li className="flex gap-4 border-t border-border/60 pt-3">
                   <span className="text-muted-foreground">→</span>
@@ -108,7 +98,7 @@ export default function AboutPage() {
               </h2>
             </div>
           </div>
-          <div className="grid gap-px overflow-hidden rounded-2xl bg-border md:grid-cols-2">
+          <div className="grid gap-px overflow-hidden rounded-2xl bg-border md:grid-cols-3">
             {principles.map((p, i) => (
               <Reveal
                 key={p.num}

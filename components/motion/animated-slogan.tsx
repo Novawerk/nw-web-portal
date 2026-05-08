@@ -3,9 +3,8 @@
 import { motion, useReducedMotion } from "framer-motion";
 
 const lines = [
-  { text: "Inspire Ideas." },
-  { text: "Enable Action." },
-  { text: "Create Impact.", italic: true, accent: true },
+  { text: "Not profitable," },
+  { text: "but meaningful.", italic: true, accent: true },
 ];
 
 export function AnimatedSlogan() {
@@ -26,7 +25,7 @@ export function AnimatedSlogan() {
             transition={{
               duration: 0.9,
               ease: [0.16, 1, 0.3, 1],
-              delay: 0.15 + i * 0.12,
+              delay: 0.15 + i * 0.14,
             }}
             className={
               line.italic
