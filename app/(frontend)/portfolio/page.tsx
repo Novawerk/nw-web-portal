@@ -51,9 +51,12 @@ export default async function PortfolioPage() {
             </div>
           ) : (
             <div className="grid gap-6 md:grid-cols-2">
-              {projects.map((p, i) => {
-                const card = (
-                  <>
+              {projects.map((p, i) => (
+                <Reveal key={p.slug} as="article" delay={i * 0.1}>
+                  <Link
+                    href={`/portfolio/${p.slug}`}
+                    className="group relative flex aspect-[4/3] flex-col justify-between overflow-hidden rounded-2xl border border-border bg-card p-8 transition-all duration-500 hover:scale-[1.01] hover:border-foreground/20 md:p-10"
+                  >
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-foreground/[0.04] to-transparent transition-opacity duration-500 group-hover:opacity-0" />
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-accent/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                     <div className="relative flex items-start justify-between">
@@ -69,33 +72,13 @@ export default async function PortfolioPage() {
                         {p.title}
                       </h3>
                       <p className="mt-2 text-muted">{p.description}</p>
-                      {p.link && (
-                        <div className="mt-6 flex items-center gap-2 text-sm text-foreground transition-transform duration-500 group-hover:translate-x-1">
-                          Visit <ArrowUpRight className="size-4" />
-                        </div>
-                      )}
+                      <div className="mt-6 flex items-center gap-2 text-sm text-foreground transition-transform duration-500 group-hover:translate-x-1">
+                        Learn more <ArrowUpRight className="size-4" />
+                      </div>
                     </div>
-                  </>
-                );
-                const className =
-                  "group relative flex aspect-[4/3] flex-col justify-between overflow-hidden rounded-2xl border border-border bg-card p-8 transition-all duration-500 hover:scale-[1.01] hover:border-foreground/20 md:p-10";
-                return (
-                  <Reveal key={p.slug} as="article" delay={i * 0.1}>
-                    {p.link ? (
-                      <Link
-                        href={p.link}
-                        className={className}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {card}
-                      </Link>
-                    ) : (
-                      <div className={className}>{card}</div>
-                    )}
-                  </Reveal>
-                );
-              })}
+                  </Link>
+                </Reveal>
+              ))}
             </div>
           )}
         </Container>

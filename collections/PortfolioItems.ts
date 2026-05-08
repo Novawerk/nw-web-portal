@@ -54,11 +54,57 @@ export const PortfolioItems: CollectionConfig = {
       },
     },
     {
+      name: "tagline",
+      type: "text",
+      admin: {
+        description:
+          "Short subtitle shown under the title on the detail page (5–10 words).",
+      },
+    },
+    {
       name: "description",
       type: "textarea",
       required: true,
       admin: {
-        description: "1–2 sentence pitch shown on cards.",
+        description: "1–2 sentence pitch shown on the listing cards.",
+      },
+    },
+    {
+      name: "body",
+      type: "code",
+      admin: {
+        language: "markdown",
+        description:
+          "Long-form description for the detail page. Markdown — same renderer as the blog.",
+      },
+    },
+    {
+      name: "members",
+      type: "relationship",
+      relationTo: "team-members",
+      hasMany: true,
+      admin: {
+        description: "People credited on this project.",
+      },
+    },
+    {
+      name: "gallery",
+      type: "array",
+      labels: { singular: "Image", plural: "Gallery images" },
+      fields: [
+        {
+          name: "image",
+          type: "upload",
+          relationTo: "media",
+          required: true,
+        },
+        {
+          name: "caption",
+          type: "text",
+        },
+      ],
+      admin: {
+        description: "Screenshots / mockups shown after the body content.",
       },
     },
     {

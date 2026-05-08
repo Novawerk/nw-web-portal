@@ -274,9 +274,31 @@ export interface PortfolioItem {
    */
   tag: string;
   /**
-   * 1–2 sentence pitch shown on cards.
+   * Short subtitle shown under the title on the detail page (5–10 words).
+   */
+  tagline?: string | null;
+  /**
+   * 1–2 sentence pitch shown on the listing cards.
    */
   description: string;
+  /**
+   * Long-form description for the detail page. Markdown — same renderer as the blog.
+   */
+  body?: string | null;
+  /**
+   * People credited on this project.
+   */
+  members?: (number | TeamMember)[] | null;
+  /**
+   * Screenshots / mockups shown after the body content.
+   */
+  gallery?:
+    | {
+        image: number | Media;
+        caption?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   status: 'planning' | 'building' | 'launching' | 'launched' | 'archived';
   /**
    * Optional outbound URL (the live app, GitHub, etc.).
@@ -519,7 +541,17 @@ export interface PortfolioItemsSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   tag?: T;
+  tagline?: T;
   description?: T;
+  body?: T;
+  members?: T;
+  gallery?:
+    | T
+    | {
+        image?: T;
+        caption?: T;
+        id?: T;
+      };
   status?: T;
   link?: T;
   coverImage?: T;

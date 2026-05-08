@@ -128,6 +128,7 @@ export default async function Home() {
                 delay={(i + 1) * 0.1}
               >
                 <ProjectCard
+                  slug={p.slug}
                   tag={p.tag}
                   title={p.title}
                   description={p.description}
@@ -174,16 +175,21 @@ export default async function Home() {
 }
 
 function ProjectCard({
+  slug,
   tag,
   title,
   description,
 }: {
+  slug: string;
   tag: string;
   title: string;
   description: string;
 }) {
   return (
-    <div className="group relative flex aspect-[4/3] flex-col justify-end overflow-hidden rounded-2xl border border-border bg-card p-8 transition-all duration-500 hover:scale-[1.01] hover:border-foreground/20">
+    <Link
+      href={`/portfolio/${slug}`}
+      className="group relative flex aspect-[4/3] flex-col justify-end overflow-hidden rounded-2xl border border-border bg-card p-8 transition-all duration-500 hover:scale-[1.01] hover:border-foreground/20"
+    >
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-foreground/[0.04] to-transparent transition-opacity duration-500 group-hover:opacity-0" />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-accent/10 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       <div className="relative">
@@ -193,6 +199,6 @@ function ProjectCard({
         <h3 className="mt-2 font-display text-3xl md:text-4xl">{title}</h3>
         <p className="mt-2 text-muted">{description}</p>
       </div>
-    </div>
+    </Link>
   );
 }
