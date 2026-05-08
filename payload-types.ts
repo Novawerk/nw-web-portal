@@ -70,6 +70,8 @@ export interface Config {
     users: User;
     media: Media;
     'blog-posts': BlogPost;
+    'contact-submissions': ContactSubmission;
+    'newsletter-subscribers': NewsletterSubscriber;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +82,8 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     'blog-posts': BlogPostsSelect<false> | BlogPostsSelect<true>;
+    'contact-submissions': ContactSubmissionsSelect<false> | ContactSubmissionsSelect<true>;
+    'newsletter-subscribers': NewsletterSubscribersSelect<false> | NewsletterSubscribersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -202,6 +206,52 @@ export interface BlogPost {
   createdAt: string;
 }
 /**
+ * Inbound applications submitted from /community. Read-only for non-admins.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-submissions".
+ */
+export interface ContactSubmission {
+  id: number;
+  name: string;
+  email: string;
+  role: string;
+  motivation: string;
+  interests: (
+    | 'Building apps & products'
+    | 'Research & exploration'
+    | 'Design & storytelling'
+    | 'Community organizing'
+    | 'Writing & thinking'
+    | 'Other'
+  )[];
+  links?: string | null;
+  status: 'new' | 'replied' | 'archived';
+  /**
+   * Internal notes — not visible to the submitter.
+   */
+  notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Newsletter signups from /community. Mark unsubscribed instead of deleting.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-subscribers".
+ */
+export interface NewsletterSubscriber {
+  id: number;
+  email: string;
+  /**
+   * Soft-unsubscribe — uncheck instead of deleting so we don't re-spam returning users.
+   */
+  subscribed?: boolean | null;
+  source?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -236,6 +286,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'blog-posts';
         value: number | BlogPost;
+      } | null)
+    | ({
+        relationTo: 'contact-submissions';
+        value: number | ContactSubmission;
+      } | null)
+    | ({
+        relationTo: 'newsletter-subscribers';
+        value: number | NewsletterSubscriber;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -339,6 +397,33 @@ export interface BlogPostsSelect<T extends boolean = true> {
       };
   coverImage?: T;
   content?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-submissions_select".
+ */
+export interface ContactSubmissionsSelect<T extends boolean = true> {
+  name?: T;
+  email?: T;
+  role?: T;
+  motivation?: T;
+  interests?: T;
+  links?: T;
+  status?: T;
+  notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "newsletter-subscribers_select".
+ */
+export interface NewsletterSubscribersSelect<T extends boolean = true> {
+  email?: T;
+  subscribed?: T;
+  source?: T;
   updatedAt?: T;
   createdAt?: T;
 }

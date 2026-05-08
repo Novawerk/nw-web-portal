@@ -9,6 +9,8 @@ import sharp from "sharp";
 import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
 import { BlogPosts } from "./collections/BlogPosts";
+import { ContactSubmissions } from "./collections/ContactSubmissions";
+import { NewsletterSubscribers } from "./collections/NewsletterSubscribers";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -23,7 +25,13 @@ export default buildConfig({
       titleSuffix: " — NovaWerk CMS",
     },
   },
-  collections: [Users, Media, BlogPosts],
+  collections: [
+    Users,
+    Media,
+    BlogPosts,
+    ContactSubmissions,
+    NewsletterSubscribers,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

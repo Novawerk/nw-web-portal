@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { contactSubmissionSchema } from "@/lib/schemas";
 import { sendContactEmail } from "@/lib/email";
+import { saveContactSubmission } from "@/lib/payload-write";
 
 export async function POST(request: Request) {
   let body: unknown;
@@ -22,14 +23,26 @@ export async function POST(request: Request) {
     return NextResponse.json({ ok: true }, { status: 200 });
   }
 
-  try {
-    await sendContactEmail(parsed.data);
-    return NextResponse.json({ ok: true });
-  } catch (error) {
-    console.error("[contact] send failed:", error);
+  // Write to Payload (durable record) and send email (notification) in
+  // parallel. We accept the submission as long as one of them succeeds.
+  const [payloadRes, emailRes] = await Promise.allSettled([
+    saveContactSubmission(parsed.data),
+    sendContactEmail(parsed.data),
+  ]);
+
+  if (payloadRes.status === "rejected") {
+    console.error("[contact] payload write failed:", payloadRes.reason);
+  }
+  if (emailRes.status === "rejected") {
+    console.error("[contact] email failed:", emailRes.reason);
+  }
+
+  if (payloadRes.status === "rejected" && emailRes.status === "rejected") {
     return NextResponse.json(
-      { error: "Could not send. Please try again or email us directly." },
+      { error: "Could not record your application. Please try again." },
       { status: 500 },
     );
   }
+
+  return NextResponse.json({ ok: true });
 }
