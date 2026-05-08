@@ -2,15 +2,18 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { Reveal } from "@/components/motion/reveal";
-import { getAllPosts, formatDate } from "@/lib/mdx";
+import { getAllPosts, formatDate } from "@/lib/blog";
 
 export const metadata = {
   title: "Blog — NovaWerk",
   description: "Field notes and build logs from the NovaWerk community.",
 };
 
-export default function BlogPage() {
-  const posts = getAllPosts();
+// Revalidate every 5 minutes so CMS edits show up without a redeploy.
+export const revalidate = 300;
+
+export default async function BlogPage() {
+  const posts = await getAllPosts();
 
   return (
     <>

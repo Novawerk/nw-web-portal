@@ -12,7 +12,8 @@
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap",
     "migrate": "payload migrate",
-    "migrate:create": "payload migrate:create"
+    "migrate:create": "payload migrate:create",
+    "migrate:blog": "tsx --env-file=.env.local scripts/migrate-blog.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -46,6 +47,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.5",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   }
 }

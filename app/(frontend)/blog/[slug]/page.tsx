@@ -4,10 +4,14 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { ArrowLeft } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { Reveal } from "@/components/motion/reveal";
-import { getAllPostSlugs, getPostBySlug, formatDate } from "@/lib/mdx";
+import { getAllPostSlugs, getPostBySlug, formatDate } from "@/lib/blog";
+
+// Revalidate every 5 minutes so CMS edits show up without a redeploy.
+export const revalidate = 300;
 
 export async function generateStaticParams() {
-  return getAllPostSlugs().map((slug) => ({ slug }));
+  const slugs = await getAllPostSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -16,7 +20,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) return {};
   return {
     title: `${post.title} — NovaWerk`,
@@ -30,7 +34,7 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) notFound();
 
   return (
