@@ -23,6 +23,8 @@
     "@payloadcms/next": "^3.84.1",
     "@payloadcms/richtext-lexical": "^3.84.1",
     "@payloadcms/storage-vercel-blob": "^3.84.1",
+    "@payloadcms/ui": "^3.84.1",
+    "@uiw/react-md-editor": "^4.1.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
     "graphql": "^16.14.0",

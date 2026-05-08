@@ -71,11 +71,13 @@ export const PortfolioItems: CollectionConfig = {
     },
     {
       name: "body",
-      type: "code",
+      type: "textarea",
       admin: {
-        language: "markdown",
         description:
           "Long-form description for the detail page. Markdown — same renderer as the blog.",
+        components: {
+          Field: "/components/admin/markdown-editor#MarkdownEditor",
+        },
       },
     },
     {

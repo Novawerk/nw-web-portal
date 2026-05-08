@@ -96,11 +96,13 @@ export const BlogPosts: CollectionConfig = {
     },
     {
       name: "content",
-      type: "code",
+      type: "textarea",
       required: true,
       admin: {
-        language: "markdown",
         description: "Markdown body. Renders via next-mdx-remote on the site.",
+        components: {
+          Field: "/components/admin/markdown-editor#MarkdownEditor",
+        },
       },
     },
   ],
