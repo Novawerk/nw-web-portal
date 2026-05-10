@@ -1,85 +1,193 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
-import { Container } from "@/components/layout/container";
+import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
-import { getAllPosts, formatDate } from "@/lib/blog";
+import { Eyebrow } from "@/components/ui/eyebrow";
+import { NovaStar } from "@/components/icons/nova-star";
+import { BlogList } from "@/components/blog/blog-list";
+import { NewsletterForm } from "@/components/forms/newsletter-form";
+import { getAllPosts, formatDate, type BlogPost } from "@/lib/blog";
+import { fallbackBlogPosts } from "@/lib/blog-fallback";
+
+const PAD_X = "px-7 md:px-12 lg:px-20";
 
 export const metadata = {
   title: "Blog — NovaWerk",
-  description: "Field notes and build logs from the NovaWerk community.",
+  description:
+    "Field notes from the NovaWerk workshop. Methods, mistakes, retros, and conversations as they happen.",
 };
 
 // Revalidate every 5 minutes so CMS edits show up without a redeploy.
 export const revalidate = 300;
 
+function readTime(content: string) {
+  const words = content.trim().split(/\s+/).length;
+  return Math.max(1, Math.round(words / 200));
+}
+
 export default async function BlogPage() {
-  const posts = await getAllPosts();
+  // Fall back to the real-seed mirror when the CMS is unreachable so local
+  // dev without a DB still shows what production readers see.
+  const result = await Promise.allSettled([getAllPosts()]);
+  const cmsPosts: BlogPost[] =
+    result[0].status === "fulfilled" ? result[0].value : [];
+  const posts = cmsPosts.length > 0 ? cmsPosts : fallbackBlogPosts;
+
+  const featured = posts[0];
+  const rest = posts.slice(1);
 
   return (
     <>
-      <section className="pt-20 pb-16 md:pt-32">
-        <Container>
-          <Reveal>
-            <span className="text-xs uppercase tracking-[0.2em] text-muted">
-              Blog
-            </span>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h1 className="mt-4 font-display text-5xl leading-[0.95] md:text-7xl">
-              Notes from the{" "}
-              <span className="italic text-accent">workshop</span>.
-            </h1>
-          </Reveal>
-          <Reveal delay={0.25}>
-            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
-              Field notes, build logs, and thinking from inside the community.
-            </p>
-          </Reveal>
-        </Container>
+      <section
+        className={`grid gap-10 border-b border-border md:grid-cols-[1.4fr_1fr] md:items-end md:gap-[60px] ${PAD_X}`}
+        style={{
+          paddingTop: "clamp(60px, 8vw, 120px)",
+          paddingBottom: "clamp(40px, 5vw, 64px)",
+        }}
+      >
+        <Reveal>
+          <Eyebrow letter="C">Blog · Field notes</Eyebrow>
+          <h1 className="mt-4 font-display text-[clamp(56px,10vw,168px)] font-bold leading-[0.92] tracking-[-0.045em]">
+            <em className="font-serif font-normal italic text-accent">
+              Process
+            </em>
+            <br />
+            over result.
+          </h1>
+        </Reveal>
+        <Reveal delay={0.1}>
+          <p className="m-0 max-w-[44ch] text-base leading-[1.6] text-foreground/85">
+            No marketing posts here. We log methods, mistakes, retros and
+            conversations as they happen. Watch how an idea moves from paper
+            to the real world — and how the real world rewrites it, again and
+            again.
+          </p>
+        </Reveal>
       </section>
 
-      <section className="pb-32">
-        <Container>
-          {posts.length === 0 ? (
-            <div className="rounded-2xl border border-border bg-card p-10 text-center md:p-16">
-              <p className="font-display text-2xl text-muted md:text-3xl">
-                No posts yet — check back soon.
+      {featured && <FeaturedPost post={featured} />}
+
+      {rest.length > 0 ? (
+        <BlogList posts={rest} />
+      ) : (
+        !featured && (
+          <section
+            className={PAD_X}
+            style={{
+              paddingTop: "clamp(80px, 9vw, 160px)",
+              paddingBottom: "clamp(80px, 9vw, 160px)",
+            }}
+          >
+            <Reveal>
+              <p className="max-w-[44ch] font-display text-[clamp(28px,3vw,40px)] font-medium leading-[1.18] tracking-[-0.02em] text-foreground/70">
+                The first field notes are still in drafts. Subscribe below and
+                we&apos;ll send the first one to you.
               </p>
-            </div>
-          ) : (
-            <ul className="divide-y divide-border border-y border-border">
-              {posts.map((post, i) => (
-                <Reveal key={post.slug} as="li" delay={i * 0.06}>
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="group flex flex-col gap-4 py-8 transition-colors md:flex-row md:items-baseline md:justify-between md:gap-12"
-                  >
-                    <div className="flex-1">
-                      <div className="flex items-center gap-3 text-xs uppercase tracking-[0.2em] text-muted">
-                        <time dateTime={post.date}>{formatDate(post.date)}</time>
-                        {post.tags?.map((tag) => (
-                          <span key={tag} className="rounded-full border border-border px-2.5 py-0.5">
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <h2 className="mt-3 font-display text-3xl leading-tight transition-colors group-hover:text-accent md:text-4xl">
-                        {post.title}
-                      </h2>
-                      {post.excerpt && (
-                        <p className="mt-3 max-w-2xl text-muted leading-relaxed">
-                          {post.excerpt}
-                        </p>
-                      )}
-                    </div>
-                    <ArrowUpRight className="size-5 shrink-0 text-muted transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-accent" />
-                  </Link>
-                </Reveal>
-              ))}
-            </ul>
-          )}
-        </Container>
-      </section>
+            </Reveal>
+          </section>
+        )
+      )}
+
+      <NewsletterSection />
     </>
+  );
+}
+
+function FeaturedPost({ post }: { post: BlogPost }) {
+  return (
+    <section
+      className={`grid gap-12 border-b border-border md:grid-cols-[1.4fr_1fr] md:gap-[48px] ${PAD_X}`}
+      style={{
+        paddingTop: "clamp(48px, 6vw, 80px)",
+        paddingBottom: "clamp(48px, 6vw, 80px)",
+      }}
+    >
+      <Reveal>
+        <Link
+          href={`/blog/${post.slug}`}
+          className="group relative block aspect-[5/4] overflow-hidden rounded-md bg-foreground"
+        >
+          <div className="absolute inset-0 flex items-center justify-center">
+            <NovaStar
+              size={220}
+              fill="var(--color-accent)"
+              spin
+              className="opacity-90 transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <span className="absolute left-5 top-5 font-mono text-[11px] uppercase tracking-[0.1em] text-background/70">
+            ▸ Featured · {formatDate(post.date)}
+          </span>
+          <span className="absolute bottom-5 right-5 font-mono text-[11px] uppercase tracking-[0.1em] text-background/70">
+            Editor&apos;s pick
+          </span>
+        </Link>
+      </Reveal>
+      <Reveal delay={0.1}>
+        <div className="flex flex-col justify-center gap-4">
+          <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-accent">
+            {post.tags?.[0] ?? "Note"} · {formatDate(post.date)}
+          </span>
+          <h2 className="m-0 font-display text-[clamp(34px,4vw,60px)] font-bold leading-none tracking-[-0.03em]">
+            {post.title}
+          </h2>
+          {post.excerpt && (
+            <p className="m-0 text-base leading-[1.6] text-foreground/85">
+              {post.excerpt}
+            </p>
+          )}
+          <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted">
+            {post.author ?? "NovaWerk"} · {readTime(post.content)} min read
+          </div>
+          <div className="mt-2">
+            <Link
+              href={`/blog/${post.slug}`}
+              className="inline-flex items-center gap-2.5 rounded-full bg-foreground px-[22px] py-3.5 font-mono text-[13px] uppercase tracking-[0.04em] text-background transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-accent"
+            >
+              Read full
+              <ArrowRight className="size-3.5" />
+            </Link>
+          </div>
+        </div>
+      </Reveal>
+    </section>
+  );
+}
+
+function NewsletterSection() {
+  return (
+    <section
+      className={PAD_X}
+      style={{
+        paddingTop: "clamp(48px, 6vw, 96px)",
+        paddingBottom: "clamp(80px, 9vw, 160px)",
+      }}
+    >
+      <Reveal>
+        <div
+          className="grid gap-10 rounded-lg p-10 md:grid-cols-[1.1fr_1fr] md:items-center md:p-14"
+          style={{
+            background: "var(--color-foreground)",
+            color: "var(--color-background)",
+          }}
+        >
+          <div>
+            <Eyebrow tone="dark">Newsletter · Monthly</Eyebrow>
+            <h3 className="mt-4 font-display text-[clamp(32px,4vw,56px)] font-bold leading-none tracking-[-0.03em]">
+              One letter a month,
+              <br />
+              <em className="font-serif font-normal italic text-accent">
+                no ads ever
+              </em>
+              .
+            </h3>
+            <p className="mt-4 max-w-[44ch] text-sm leading-[1.6] text-background/70">
+              We pull this month&apos;s retros, newly-launched projects, and
+              open collaboration calls into a single letter.
+            </p>
+          </div>
+          <NewsletterForm />
+        </div>
+      </Reveal>
+    </section>
   );
 }

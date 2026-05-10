@@ -3,35 +3,22 @@ import { cn } from "@/lib/utils";
 interface MarqueeProps {
   items: string[];
   className?: string;
-  separatorClassName?: string;
 }
 
-export function Marquee({
-  items,
-  className,
-  separatorClassName,
-}: MarqueeProps) {
-  const renderRow = (keyPrefix: string) => (
+export function Marquee({ items, className }: MarqueeProps) {
+  // Triple the items so the loop never visibly repeats end-to-end.
+  const renderRow = (keyPrefix: string, hidden = false) => (
     <ul
-      className="flex shrink-0 items-center"
-      {...(keyPrefix === "b" ? { "aria-hidden": true } : {})}
+      className="flex shrink-0 items-center gap-[60px] pr-[60px]"
+      {...(hidden ? { "aria-hidden": true } : {})}
     >
       {items.map((item, i) => (
         <li
           key={`${keyPrefix}-${i}`}
-          className="inline-flex items-center gap-10 px-10 md:gap-14 md:px-14"
+          className="inline-flex items-center gap-[60px] font-display text-lg font-semibold tracking-[-0.01em]"
         >
-          <span className="font-display font-medium uppercase tracking-tight text-3xl md:text-6xl">
-            {item}
-          </span>
-          <span
-            className={cn(
-              "text-accent text-3xl md:text-6xl leading-none",
-              separatorClassName,
-            )}
-          >
-            ·
-          </span>
+          <span>{item}</span>
+          <span className="text-sm text-accent">✺</span>
         </li>
       ))}
     </ul>
@@ -39,11 +26,14 @@ export function Marquee({
 
   return (
     <div
-      className={cn("overflow-hidden border-y border-border/60", className)}
+      className={cn(
+        "flex overflow-hidden border-y border-border bg-foreground text-background",
+        className,
+      )}
     >
-      <div className="flex animate-marquee whitespace-nowrap py-8 md:py-10">
+      <div className="flex animate-marquee whitespace-nowrap py-3.5">
         {renderRow("a")}
-        {renderRow("b")}
+        {renderRow("b", true)}
       </div>
     </div>
   );

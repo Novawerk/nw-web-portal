@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import {
   contactSubmissionSchema,
   interestOptions,
@@ -13,9 +13,11 @@ import {
 import { cn } from "@/lib/utils";
 
 const fieldClass =
-  "w-full border-b border-border bg-transparent py-3 text-base text-foreground placeholder:text-muted-foreground/50 focus:border-foreground focus:outline-none transition-colors";
-const labelClass = "block text-xs uppercase tracking-[0.2em] text-muted";
-const errorClass = "mt-2 text-xs text-accent";
+  "w-full border-b border-foreground bg-transparent py-2.5 font-display text-xl font-medium tracking-[-0.01em] text-foreground placeholder:font-sans placeholder:text-base placeholder:font-normal placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors";
+const labelClass =
+  "flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.08em] text-muted";
+const stepClass = "text-accent";
+const errorClass = "mt-2 font-mono text-[11px] text-accent";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -71,13 +73,15 @@ export function ContactForm() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="rounded-2xl border border-border bg-card p-8 md:p-10"
+          className="rounded-md border border-accent bg-paper p-10 text-center md:p-14"
         >
-          <div className="flex size-12 items-center justify-center rounded-full bg-accent text-accent-foreground">
+          <div className="mx-auto flex size-12 items-center justify-center rounded-full bg-accent text-background">
             <Check className="size-5" />
           </div>
-          <h3 className="mt-6 font-display text-3xl md:text-4xl">Thanks for reaching out.</h3>
-          <p className="mt-3 text-muted">
+          <h3 className="mt-6 font-display text-[clamp(28px,3.4vw,42px)] font-bold leading-tight tracking-[-0.02em]">
+            ✺ Got it.
+          </h3>
+          <p className="mt-3 text-base leading-[1.6] text-foreground/80">
             We&apos;ll be in touch soon — usually within a few days. In the
             meantime, follow along with what we&apos;re building.
           </p>
@@ -91,26 +95,32 @@ export function ContactForm() {
           className="space-y-8"
           noValidate
         >
-          <div className="grid gap-8 md:grid-cols-2">
-            <div>
-              <label htmlFor="name" className={labelClass}>Name</label>
+          <div className="grid gap-7 md:grid-cols-2 md:gap-x-6 md:gap-y-7">
+            <div className="flex flex-col gap-2">
+              <label htmlFor="name" className={labelClass}>
+                <span>Name</span>
+                <span className={stepClass}>01 / 06</span>
+              </label>
               <input
                 id="name"
                 type="text"
                 autoComplete="name"
-                placeholder="Your name"
+                placeholder="Name or handle, either works"
                 className={fieldClass}
                 {...register("name")}
               />
               {errors.name && <p className={errorClass}>{errors.name.message}</p>}
             </div>
-            <div>
-              <label htmlFor="email" className={labelClass}>Email</label>
+            <div className="flex flex-col gap-2">
+              <label htmlFor="email" className={labelClass}>
+                <span>Email</span>
+                <span className={stepClass}>02 / 06</span>
+              </label>
               <input
                 id="email"
                 type="email"
                 autoComplete="email"
-                placeholder="you@example.com"
+                placeholder="hello@you.com"
                 className={fieldClass}
                 {...register("email")}
               />
@@ -118,8 +128,11 @@ export function ContactForm() {
             </div>
           </div>
 
-          <div>
-            <label htmlFor="role" className={labelClass}>Role / Background</label>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="role" className={labelClass}>
+              <span>Role / Background</span>
+              <span className={stepClass}>03 / 06</span>
+            </label>
             <input
               id="role"
               type="text"
@@ -130,27 +143,36 @@ export function ContactForm() {
             {errors.role && <p className={errorClass}>{errors.role.message}</p>}
           </div>
 
-          <div>
+          <div className="flex flex-col gap-2">
             <label htmlFor="motivation" className={labelClass}>
-              Why do you want to join NovaWerk?
+              <span>Why do you want to join NovaWerk?</span>
+              <span className={stepClass}>04 / 06</span>
             </label>
             <textarea
               id="motivation"
-              rows={5}
+              rows={4}
               placeholder="What are you hoping to build, learn, or contribute?"
-              className={cn(fieldClass, "resize-y")}
+              className={cn(
+                fieldClass,
+                "resize-y text-base font-sans font-normal tracking-normal leading-relaxed",
+              )}
               {...register("motivation")}
             />
-            {errors.motivation && <p className={errorClass}>{errors.motivation.message}</p>}
+            {errors.motivation && (
+              <p className={errorClass}>{errors.motivation.message}</p>
+            )}
           </div>
 
-          <div>
-            <span className={labelClass}>Interests</span>
-            <div className="mt-3 flex flex-wrap gap-2">
+          <div className="flex flex-col gap-3">
+            <span className={labelClass}>
+              <span>Interests · pick a few</span>
+              <span className={stepClass}>05 / 06</span>
+            </span>
+            <div className="flex flex-wrap gap-2">
               {interestOptions.map((opt) => (
                 <label
                   key={opt}
-                  className="group inline-flex cursor-pointer items-center rounded-full border border-border px-4 py-2 text-sm text-muted transition-colors has-[:checked]:border-foreground has-[:checked]:bg-foreground has-[:checked]:text-background hover:border-foreground/40"
+                  className="group inline-flex cursor-pointer items-center rounded-full border border-[var(--color-border-strong)] px-3.5 py-2 font-mono text-[11px] uppercase tracking-[0.06em] text-foreground/70 transition-colors has-[:checked]:border-foreground has-[:checked]:bg-foreground has-[:checked]:text-background hover:text-foreground"
                 >
                   <input
                     type="checkbox"
@@ -162,12 +184,15 @@ export function ContactForm() {
                 </label>
               ))}
             </div>
-            {errors.interests && <p className={errorClass}>{errors.interests.message}</p>}
+            {errors.interests && (
+              <p className={errorClass}>{errors.interests.message}</p>
+            )}
           </div>
 
-          <div>
+          <div className="flex flex-col gap-2">
             <label htmlFor="links" className={labelClass}>
-              Portfolio / LinkedIn / GitHub <span className="text-muted-foreground/60">(optional)</span>
+              <span>Portfolio / LinkedIn / GitHub · optional</span>
+              <span className={stepClass}>06 / 06</span>
             </label>
             <input
               id="links"
@@ -185,17 +210,23 @@ export function ContactForm() {
             <input id="website" type="text" tabIndex={-1} autoComplete="off" {...register("website")} />
           </div>
 
-          <div className="flex flex-wrap items-center gap-6 pt-4">
+          <div className="flex flex-wrap items-center justify-between gap-5 border-t border-foreground pt-5">
+            <p className="max-w-[50ch] font-mono text-[11px] leading-[1.6] tracking-[0.04em] text-muted">
+              Submitting means you back the pledge. We don&apos;t share your
+              info with third parties — email us anytime to remove it.
+            </p>
             <button
               type="submit"
               disabled={status === "submitting"}
-              className="inline-flex items-center gap-2 rounded-full bg-foreground px-6 py-3 text-sm font-medium text-background transition-colors hover:bg-accent disabled:opacity-60"
+              className="inline-flex items-center gap-3.5 rounded-full border border-accent bg-accent px-9 py-4 font-display text-2xl font-semibold tracking-[-0.02em] text-background transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 hover:border-foreground hover:bg-foreground disabled:opacity-60"
             >
-              {status === "submitting" ? "Sending…" : "Send application"}
-              <ArrowRight className="size-4" />
+              {status === "submitting" ? "Sending…" : "Send it"}
+              <span aria-hidden>✺</span>
             </button>
             {status === "error" && errorMsg && (
-              <p className="text-sm text-accent">{errorMsg}</p>
+              <p className="w-full font-mono text-[11px] text-accent">
+                {errorMsg}
+              </p>
             )}
           </div>
         </motion.form>
