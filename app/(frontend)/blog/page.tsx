@@ -122,8 +122,8 @@ function FeaturedPost({ post }: { post: BlogPost }) {
           </span>
         </Link>
       </Reveal>
-      <Reveal delay={0.1}>
-        <div className="flex flex-col justify-center gap-4">
+      <Reveal delay={0.1} className="h-full">
+        <div className="flex h-full flex-col justify-center gap-4">
           <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-accent">
             {post.tags?.[0] ?? "Note"} · {formatDate(post.date)}
           </span>
