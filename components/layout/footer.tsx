@@ -1,46 +1,81 @@
 import Link from "next/link";
-import { Container } from "./container";
+
+const sitemap = [
+  { href: "/", label: "Home" },
+  { href: "/portfolio", label: "Portfolio" },
+  { href: "/blog", label: "Blog" },
+  { href: "/community", label: "Join Us" },
+];
+
+const community = [
+  { label: "Discord", href: "#" },
+  { label: "GitHub", href: "https://github.com" },
+  { label: "Xiaohongshu", href: "#" },
+  { label: "Newsletter", href: "/community#newsletter" },
+];
+
+const contact = [
+  { label: "hello@novawerk.org", href: "mailto:hello@novawerk.org" },
+  { label: "Volunteer with us", href: "/community" },
+  { label: "Partners / sponsors", href: "/community" },
+  { label: "Press inquiries", href: "mailto:press@novawerk.org" },
+];
 
 export function Footer() {
   return (
-    <footer className="mt-32 border-t border-border/60 bg-background">
-      <Container>
-        <div className="flex flex-col gap-12 py-16">
-          <div className="grid gap-12 md:grid-cols-2 md:items-end">
-            <div>
-              <p className="font-display text-4xl leading-[1.05] md:text-6xl">
-                Not profitable, <br />
-                <span className="italic text-accent">but meaningful.</span>
-              </p>
-            </div>
-            <div className="flex flex-col items-start gap-4 md:items-end">
-              <Link
-                href="/community"
-                className="inline-flex items-center gap-2 rounded-full bg-foreground px-5 py-3 text-sm font-medium text-background transition-colors hover:bg-accent"
-              >
-                Join NovaWerk →
-              </Link>
-              <p className="text-sm text-muted">
-                Building meaningful impact, together.
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col gap-4 border-t border-border/60 pt-8 text-sm text-muted md:flex-row md:items-center md:justify-between">
-            <p>© {new Date().getFullYear()} NovaWerk. Built openly.</p>
-            <div className="flex gap-6">
-              <Link href="/about" className="hover:text-foreground">
-                About
-              </Link>
-              <Link href="/portfolio" className="hover:text-foreground">
-                Portfolio
-              </Link>
-              <Link href="/blog" className="hover:text-foreground">
-                Blog
-              </Link>
-            </div>
-          </div>
+    <footer className="mt-16 bg-foreground px-6 pb-7 pt-20 text-background md:px-10 md:pt-24 lg:px-20">
+      <div className="grid grid-cols-1 gap-10 border-b border-background/15 pb-14 md:grid-cols-[2fr_1fr_1fr_1fr]">
+        <div>
+          <p className="font-display text-5xl font-bold leading-[0.95] tracking-[-0.04em] md:text-7xl lg:text-[96px]">
+            Turn ideas
+            <br />
+            into{" "}
+            <span className="font-serif italic font-normal text-accent">
+              real change
+            </span>
+            .
+          </p>
+          <p className="mt-7 max-w-md text-sm leading-relaxed text-background/70">
+            NovaWerk is an open, non-profit community where people validate
+            ideas together, build with each other, pick up real skills, and
+            push things that matter to the next step.
+          </p>
         </div>
-      </Container>
+
+        <FooterColumn title="Sitemap" items={sitemap} />
+        <FooterColumn title="Community" items={community} />
+        <FooterColumn title="Contact" items={contact} />
+      </div>
+
+      <div className="flex flex-col gap-3 pt-6 font-mono text-[11px] uppercase tracking-[0.06em] text-background/55 md:flex-row md:justify-between">
+        <span>© {new Date().getFullYear()} NovaWerk · Non-profit community</span>
+        <span>Built by the community · Not for profit, for purpose.</span>
+      </div>
     </footer>
+  );
+}
+
+function FooterColumn({
+  title,
+  items,
+}: {
+  title: string;
+  items: { href: string; label: string }[];
+}) {
+  return (
+    <div>
+      <h5 className="mb-3.5 font-mono text-[11px] font-medium uppercase tracking-[0.1em] text-background/55">
+        {title}
+      </h5>
+      <ul className="flex flex-col gap-2 text-sm">
+        {items.map((it) => (
+          <li key={it.label}>
+            <Link href={it.href} className="link-underline">
+              {it.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

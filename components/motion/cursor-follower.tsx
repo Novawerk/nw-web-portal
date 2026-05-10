@@ -1,63 +1,85 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
+// Two-element cursor: a small dot that tracks tightly, plus a larger ring
+// that lags behind. Both use `mix-blend-mode: difference` so they invert
+// over light/dark backgrounds. On hover over interactive elements the ring
+// inflates and picks up the brand accent.
 export function CursorFollower() {
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
-  const [hovering, setHovering] = useState(false);
-  const x = useMotionValue(-200);
-  const y = useMotionValue(-200);
-  const springX = useSpring(x, { stiffness: 220, damping: 22, mass: 0.6 });
-  const springY = useSpring(y, { stiffness: 220, damping: 22, mass: 0.6 });
 
   useEffect(() => {
-    // Don't render at all on touch-primary devices.
-    const isTouch =
-      typeof window !== "undefined" &&
-      window.matchMedia("(hover: none)").matches;
-    if (isTouch) return;
-
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(hover: none)").matches) return;
     setActive(true);
 
-    const handleMove = (e: MouseEvent) => {
-      x.set(e.clientX);
-      y.set(e.clientY);
-    };
+    const state = { x: -100, y: -100, dx: -100, dy: -100, rx: -100, ry: -100 };
 
-    const handleOver = (e: MouseEvent) => {
+    const onMove = (e: MouseEvent) => {
+      state.x = e.clientX;
+      state.y = e.clientY;
+    };
+    const onOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
       if (!target) return;
       const interactive = target.closest(
-        'a, button, [role="button"], input, textarea, select, label',
+        'a, button, [role="button"], [data-cursor="hover"]',
       );
-      setHovering(Boolean(interactive));
+      const text = target.closest(
+        'input, textarea, [contenteditable], [data-cursor="text"]',
+      );
+      const ring = ringRef.current;
+      if (!ring) return;
+      if (text) ring.dataset.state = "text";
+      else if (interactive) ring.dataset.state = "hover";
+      else ring.dataset.state = "";
     };
 
-    window.addEventListener("mousemove", handleMove);
-    window.addEventListener("mouseover", handleOver);
-    return () => {
-      window.removeEventListener("mousemove", handleMove);
-      window.removeEventListener("mouseover", handleOver);
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseover", onOver);
+
+    let raf = 0;
+    const tick = () => {
+      // Dot tracks tightly (lerp 0.55), ring trails behind (lerp 0.18) for
+      // a satellite effect.
+      state.dx += (state.x - state.dx) * 0.55;
+      state.dy += (state.y - state.dy) * 0.55;
+      state.rx += (state.x - state.rx) * 0.18;
+      state.ry += (state.y - state.ry) * 0.18;
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate(${state.dx}px, ${state.dy}px) translate(-50%, -50%)`;
+      }
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate(${state.rx}px, ${state.ry}px) translate(-50%, -50%)`;
+      }
+      raf = requestAnimationFrame(tick);
     };
-  }, [x, y]);
+    raf = requestAnimationFrame(tick);
+
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseover", onOver);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
 
   if (!active) return null;
 
   return (
-    <motion.div
-      style={{ x: springX, y: springY }}
-      className="pointer-events-none fixed left-0 top-0 z-[100] hidden md:block"
-      aria-hidden
-    >
-      <motion.div
-        animate={{
-          scale: hovering ? 2.2 : 1,
-          opacity: hovering ? 0.9 : 0.6,
-        }}
-        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-        className="size-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent mix-blend-multiply"
+    <>
+      <div
+        ref={ringRef}
+        aria-hidden
+        className="cursor-ring pointer-events-none fixed left-0 top-0 z-[100] hidden size-[38px] rounded-full border border-[#f1ecdf] mix-blend-difference will-change-transform md:block"
       />
-    </motion.div>
+      <div
+        ref={dotRef}
+        aria-hidden
+        className="pointer-events-none fixed left-0 top-0 z-[100] hidden size-1.5 rounded-full bg-[#f1ecdf] mix-blend-difference will-change-transform md:block"
+      />
+    </>
   );
 }

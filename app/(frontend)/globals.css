@@ -1,22 +1,32 @@
-@import url("https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900,400i,500i,700i&display=swap");
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Font families are injected by next/font in app/(frontend)/layout.tsx as
+   CSS variables on <html>: --font-display, --font-serif, --font-sans,
+   --font-mono. We re-expose them through Tailwind's @theme so utilities
+   like `font-display`, `font-serif`, `font-mono`, `font-sans` work. */
 @theme {
-  --color-background: #f5f2ec;
-  --color-foreground: #14110d;
-  --color-muted: #6b6358;
+  --color-background: #efe9d8;
+  --color-background-2: #e6dfcc;
+  --color-foreground: #0f0f0f;
+  --color-foreground-soft: #2a2a2a;
+  --color-muted: #8a816f;
   --color-muted-foreground: #8a8275;
-  --color-border: #e0d9cb;
-  --color-surface: #ebe6dc;
+  --color-border: rgba(15, 15, 15, 0.14);
+  --color-border-strong: rgba(15, 15, 15, 0.6);
+  --color-surface: #e6dfcc;
+  --color-paper: #f6f2e6;
   --color-card: #ffffff;
-  --color-accent: #ff5722;
-  --color-accent-foreground: #ffffff;
+  --color-accent: #1f7a4a;
+  --color-accent-deep: #155a36;
+  --color-accent-foreground: #efe9d8;
+  --color-blue: #1e3a8a;
+  --color-yellow: #f2c84b;
 
-  --font-sans:
-    "Satoshi", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-display:
-    "Satoshi", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-sans: var(--nw-font-sans), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--nw-font-display), system-ui, -apple-system, sans-serif;
+  --font-serif: var(--nw-font-serif), Georgia, serif;
+  --font-mono: var(--nw-font-mono), ui-monospace, Menlo, monospace;
 }
 
 @layer base {
@@ -24,22 +34,24 @@
     background: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    font-feature-settings: "ss01", "cv11";
+    font-feature-settings: "ss01", "ss02";
+    font-variant-ligatures: contextual;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
   ::selection {
     background: var(--color-accent);
-    color: var(--color-accent-foreground);
+    color: var(--color-background);
   }
 
   h1,
   h2,
   h3,
   h4 {
+    font-family: var(--font-display);
     text-wrap: balance;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
   }
 
   p {
@@ -48,36 +60,22 @@
 }
 
 @keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
 @keyframes pulse-line {
-  0%,
-  100% {
-    transform: scaleX(0.4);
-    opacity: 0.5;
-  }
-  50% {
-    transform: scaleX(1);
-    opacity: 1;
-  }
+  0%, 100% { transform: scaleX(0.4); opacity: 0.5; }
+  50% { transform: scaleX(1); opacity: 1; }
 }
 
 @keyframes bounce-soft {
-  0%,
-  100% {
-    transform: translateY(0);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translateY(3px);
-    opacity: 1;
-  }
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(3px); opacity: 1; }
+}
+
+@keyframes nw-spin {
+  to { transform: rotate(360deg); }
 }
 
 .animate-marquee {
@@ -93,6 +91,10 @@
   animation: bounce-soft 2s ease-in-out infinite;
 }
 
+.animate-nw-spin {
+  animation: nw-spin 14s linear infinite;
+}
+
 /* Subtle grain overlay across the whole frontend. */
 body::before {
   content: "";
@@ -104,10 +106,56 @@ body::before {
   background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* Hide the native cursor in favor of <CursorFollower>. Only on hover-capable
+   devices — touch devices keep their native pointer. */
+@media (hover: hover) {
+  html,
+  body,
+  a,
+  button,
+  [role="button"] {
+    cursor: none;
+  }
+}
+
+/* Two-element custom cursor — sizes/colors driven by data-state set by
+   <CursorFollower>. Width/height/border transition smoothly. */
+.cursor-ring {
+  transition:
+    width 0.2s ease,
+    height 0.2s ease,
+    border-color 0.2s ease,
+    border-radius 0.2s ease;
+}
+.cursor-ring[data-state="hover"] {
+  width: 84px;
+  height: 84px;
+  border-color: var(--color-accent);
+}
+.cursor-ring[data-state="text"] {
+  width: 4px;
+  height: 28px;
+  border-radius: 0;
+  background: #f1ecdf;
+}
+
+/* Underline-on-hover link inspired by `.nw-link` in the design. */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: color 0.3s;
+}
+.link-underline:hover {
+  color: var(--color-accent);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-marquee,
   .animate-pulse-line,
-  .animate-bounce-soft {
+  .animate-bounce-soft,
+  .animate-nw-spin {
     animation: none;
   }
 }

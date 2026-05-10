@@ -1,5 +1,8 @@
 import { getPayload } from "payload";
 import config from "@payload-config";
+import { formatDate } from "./format";
+
+export { formatDate };
 
 export interface BlogPost {
   slug: string;
@@ -70,10 +73,3 @@ export async function getAllPostSlugs(): Promise<string[]> {
   return result.docs.map((d) => (d as unknown as PayloadBlogDoc).slug);
 }
 
-export function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-}
