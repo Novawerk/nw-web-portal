@@ -246,7 +246,7 @@ Both forms validate with Zod (`lib/schemas.ts`), submit JSON, and write to Paylo
 
 Interest options: *Building apps & products · Research & exploration · Design & storytelling · Community organizing · Writing & thinking · Other.*
 
-On success: writes a `contact-submissions` row (status `new`) and emails `CONTACT_TO_EMAIL` from `CONTACT_FROM_EMAIL` (default `NovaWerk <hello@novawerk.io>`), with `replyTo` set to the submitter.
+On success: writes a `contact-submissions` row (status `new`) and emails `CONTACT_TO_EMAIL` from `CONTACT_FROM_EMAIL` (default `NovaWerk <info@novawerk.io>`), with `replyTo` set to the submitter.
 
 ### Newsletter form — `POST /api/newsletter`
 

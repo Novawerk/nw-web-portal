@@ -15,10 +15,10 @@ const community = [
 ];
 
 const contact = [
-  { label: "hello@novawerk.org", href: "mailto:hello@novawerk.org" },
+  { label: "info@novawerk.io", href: "mailto:info@novawerk.io" },
   { label: "Volunteer with us", href: "/community" },
   { label: "Partners / sponsors", href: "/community" },
-  { label: "Press inquiries", href: "mailto:press@novawerk.org" },
+  { label: "Press inquiries", href: "mailto:info@novawerk.io" },
 ];
 
 export function Footer() {

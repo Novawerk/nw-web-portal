@@ -2,8 +2,8 @@ import { Resend } from "resend";
 import type { ContactSubmission, NewsletterSignup } from "./schemas";
 
 const apiKey = process.env.RESEND_API_KEY;
-const toAddress = process.env.CONTACT_TO_EMAIL ?? "hello@novawerk.io";
-const fromAddress = process.env.CONTACT_FROM_EMAIL ?? "NovaWerk <hello@novawerk.io>";
+const toAddress = process.env.CONTACT_TO_EMAIL ?? "info@novawerk.io";
+const fromAddress = process.env.CONTACT_FROM_EMAIL ?? "NovaWerk <info@novawerk.io>";
 
 const resend = apiKey ? new Resend(apiKey) : null;
 
