@@ -4,7 +4,7 @@ import { Reveal } from "@/components/motion/reveal";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { NovaStar } from "@/components/icons/nova-star";
 import { BlogList } from "@/components/blog/blog-list";
-import { NewsletterForm } from "@/components/forms/newsletter-form";
+import { DispatchForm } from "@/components/forms/dispatch-form";
 import { getAllPosts, formatDate, type BlogPost } from "@/lib/blog";
 import { fallbackBlogPosts } from "@/lib/blog-fallback";
 
@@ -153,6 +153,35 @@ function FeaturedPost({ post }: { post: BlogPost }) {
   );
 }
 
+const DISPATCH_ITEMS = [
+  {
+    num: "01",
+    title: "Retro of the month",
+    body: "What we shipped, what broke, what we'd do differently.",
+  },
+  {
+    num: "02",
+    title: "New on the worksite",
+    body: "Projects that just left “concept” — and what they need.",
+  },
+  {
+    num: "03",
+    title: "Open calls",
+    body: "Roles 4hrs/week or less. First reply usually wins.",
+  },
+  {
+    num: "04",
+    title: "One long read",
+    body: "A piece worth your coffee — from us or borrowed.",
+  },
+];
+
+const RECENT_ISSUES = [
+  { no: "№13", date: "Apr", title: "The non-profit math problem" },
+  { no: "№12", date: "Mar", title: "47 restaurants taught us" },
+  { no: "№11", date: "Feb", title: "How to write a brief that lands" },
+];
+
 function NewsletterSection() {
   return (
     <section
@@ -164,28 +193,114 @@ function NewsletterSection() {
     >
       <Reveal>
         <div
-          className="grid gap-10 rounded-lg p-10 md:grid-cols-[1.1fr_1fr] md:items-center md:p-14"
+          className="nw-dispatch overflow-hidden rounded-lg"
           style={{
             background: "var(--color-foreground)",
             color: "var(--color-background)",
           }}
         >
-          <div>
-            <Eyebrow tone="dark">Newsletter · Monthly</Eyebrow>
-            <h3 className="mt-4 font-display text-[clamp(32px,4vw,56px)] font-bold leading-none tracking-[-0.03em]">
-              One letter a month,
-              <br />
-              <em className="font-serif font-normal italic text-accent">
-                no ads ever
-              </em>
-              .
-            </h3>
-            <p className="mt-4 max-w-[44ch] text-sm leading-[1.6] text-background/70">
-              We pull this month&apos;s retros, newly-launched projects, and
-              open collaboration calls into a single letter.
-            </p>
+          {/* top meta bar */}
+          <div className="nw-dispatch__bar grid grid-cols-2 gap-3 border-b border-background/15 px-8 py-5 font-mono text-[11px] uppercase tracking-[0.08em] text-background/55 md:grid-cols-4 md:px-12">
+            <span className="inline-flex items-center gap-2">
+              <span className="inline-block size-2 rounded-full bg-accent" />
+              NovaWerk · Dispatch
+            </span>
+            <span className="hidden md:inline">Issue №14</span>
+            <span className="hidden md:inline">May · 2026</span>
+            <span className="text-right">1,284 readers</span>
           </div>
-          <NewsletterForm />
+
+          {/* body */}
+          <div className="grid gap-10 px-8 py-12 md:grid-cols-[1.1fr_1fr_1fr] md:gap-12 md:px-12 md:py-14">
+            {/* left — headline */}
+            <div className="flex flex-col gap-6">
+              <h3 className="m-0 font-display text-[clamp(40px,4.4vw,64px)] font-bold leading-[0.95] tracking-[-0.03em]">
+                One letter
+                <br />
+                a month,
+                <br />
+                <em className="font-serif font-normal italic text-accent">
+                  no ads
+                </em>
+                <br />
+                ever.
+              </h3>
+              <p className="m-0 max-w-[36ch] text-sm leading-[1.6] text-background/65">
+                Retros, project launches, and open collaboration calls — pulled
+                into a single dispatch the first Monday of every month.
+              </p>
+            </div>
+
+            {/* middle — what's inside */}
+            <div className="flex flex-col gap-4">
+              <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.1em] text-background/55">
+                <span className="inline-block size-2 rounded-full bg-accent" />
+                What&apos;s inside
+              </span>
+              <ul className="m-0 mt-1 list-none border-t border-background/15 p-0">
+                {DISPATCH_ITEMS.map((it) => (
+                  <li
+                    key={it.num}
+                    className="grid grid-cols-[36px_1fr] items-start gap-3 border-b border-background/15 py-4"
+                  >
+                    <span className="pt-0.5 font-mono text-[11px] tracking-[0.08em] text-background/45">
+                      {it.num}
+                    </span>
+                    <div>
+                      <div className="font-display text-[17px] font-semibold leading-tight tracking-[-0.01em] text-background">
+                        {it.title}
+                      </div>
+                      <p className="m-0 mt-1 text-[13px] leading-[1.5] text-background/60">
+                        {it.body}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* right — subscribe card + archive */}
+            <div className="flex flex-col gap-7">
+              <div
+                className="rounded-md border border-background/15 p-6"
+                style={{ background: "rgba(255,255,255,0.03)" }}
+              >
+                <DispatchForm />
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.1em] text-background/55">
+                  <span>Recent issues</span>
+                  <a
+                    href="#"
+                    className="link-underline transition-colors hover:text-accent"
+                  >
+                    Archive →
+                  </a>
+                </div>
+                <ul className="m-0 list-none border-t border-background/15 p-0">
+                  {RECENT_ISSUES.map((it) => (
+                    <li
+                      key={it.no}
+                      className="grid grid-cols-[40px_36px_1fr] items-center gap-3 border-b border-background/15 py-3 font-mono text-[12px] tracking-[0.04em] text-background/80 transition-colors hover:text-accent"
+                    >
+                      <span className="text-background/45">{it.no}</span>
+                      <span className="text-background/55">{it.date}</span>
+                      <span className="font-sans text-[13px] text-background">
+                        {it.title}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* bottom bar */}
+          <div className="flex flex-wrap items-center justify-between gap-3 border-t border-background/15 px-8 py-5 font-mono text-[11px] uppercase tracking-[0.08em] text-background/55 md:px-12">
+            <span>↗ Next dispatch · Mon · Jun 01 · 2026</span>
+            <span>No tracking · No ads · No reselling</span>
+          </div>
         </div>
       </Reveal>
     </section>
