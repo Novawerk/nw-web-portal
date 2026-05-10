@@ -8,7 +8,9 @@ import { HeroTitle } from "@/components/home/hero-title";
 import { NumbersGrid } from "@/components/home/numbers-counter";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { getFeaturedPortfolioItems } from "@/lib/portfolio";
+import { fallbackPortfolioItems } from "@/lib/portfolio-fallback";
 import { getAllPosts, formatDate } from "@/lib/blog";
+import { fallbackBlogPosts } from "@/lib/blog-fallback";
 
 export const revalidate = 300;
 
@@ -62,31 +64,14 @@ const principles = [
   },
 ];
 
-// Mirrors the real seeds in scripts/migrate-portfolio.ts so local previews
-// without a DB show the same projects production users see.
-const fallbackProjects = [
-  {
-    slug: "berlin-food-map",
-    tag: "App · Building",
-    title: "Berlin Chinese Food Map",
-    description:
-      "An open, non-profit digital guide to Chinese restaurants in Berlin — built and edited by the people who actually eat there.",
-    stat: "A community-curated guide to eating well in Berlin.",
-    color: "var(--color-accent)",
-    asset: "PF-001",
-    year: "2026",
-  },
-  {
-    slug: "yima-app",
-    tag: "App · Launching",
-    title: "YIMA",
-    description:
-      "A small tool, designed without profit as a constraint — to see whether the experience can become good again.",
-    stat: "Privacy-first period calendar.",
-    color: "var(--color-blue)",
-    asset: "PF-002",
-    year: "2026",
-  },
+// Design rotates featured tiles through accent / blue / green / ink. We
+// follow the same rotation so the home grid feels intentional even when
+// the CMS doesn't tag colors.
+const FEATURED_COLORS = [
+  "var(--color-accent)",
+  "var(--color-blue)",
+  "var(--color-accent-deep)",
+  "var(--color-foreground)",
 ];
 
 const paths = [
@@ -127,20 +112,26 @@ export default async function Home() {
     featuredCmsResult.status === "fulfilled" ? featuredCmsResult.value : [];
   const posts = postsResult.status === "fulfilled" ? postsResult.value : [];
 
-  const featured = featuredCms.length
-    ? featuredCms.slice(0, 4).map((p, i) => ({
-        slug: p.slug,
-        tag: p.tag,
-        title: p.title,
-        description: p.description,
-        stat: p.tagline ?? "",
-        color: fallbackProjects[i % fallbackProjects.length].color,
-        asset: `ASSET-${String.fromCharCode(65 + i)}`,
-        year: "",
-      }))
-    : fallbackProjects;
+  const featuredSource = featuredCms.length
+    ? featuredCms
+    : fallbackPortfolioItems.filter((p) => p.featured);
 
-  const recentPosts = posts.slice(0, 4);
+  const featured = featuredSource.slice(0, 4).map((p, i) => {
+    const category = p.tag.split("·")[0]?.trim() || p.tag;
+    const yearMatch = p.tag.match(/(20\d{2}.*)$/);
+    return {
+      slug: p.slug,
+      tag: category,
+      title: p.title,
+      description: p.description,
+      stat: p.tagline ?? "",
+      color: FEATURED_COLORS[i % FEATURED_COLORS.length],
+      asset: `PF-${String(i + 1).padStart(3, "0")}`,
+      year: yearMatch?.[1]?.trim() ?? "",
+    };
+  });
+
+  const recentPosts = posts.length ? posts.slice(0, 4) : fallbackBlogPosts.slice(0, 4);
 
   return (
     <>
@@ -152,41 +143,21 @@ export default async function Home() {
       <Numbers />
       <Manifesto />
       <BlogTeaser
-        posts={
-          recentPosts.length
-            ? recentPosts.map((p) => ({
-                date: formatDate(p.date),
-                cat: p.tags?.[0] ?? "Note",
-                title: p.title,
-                slug: p.slug,
-                read: "8 min",
-              }))
-            : fallbackPosts
-        }
+        posts={recentPosts.map((p) => ({
+          date: formatDate(p.date),
+          cat: p.tags?.[0] ?? "Note",
+          title: p.title,
+          slug: p.slug,
+          read: `${Math.max(
+            1,
+            Math.round(p.content.trim().split(/\s+/).length / 200),
+          )} min`,
+        }))}
       />
       <HowToJoin />
     </>
   );
 }
-
-// Mirrors the real seed posts in content/blog/*.mdx so local previews
-// without a DB show the same posts production readers see.
-const fallbackPosts = [
-  {
-    date: "April 26, 2026",
-    cat: "principles",
-    title: "Why we build in the open",
-    slug: "why-we-build-in-the-open",
-    read: "7 min",
-  },
-  {
-    date: "April 12, 2026",
-    cat: "intro",
-    title: "Welcome to NovaWerk",
-    slug: "welcome-to-novawerk",
-    read: "6 min",
-  },
-];
 
 /* ─────── HERO ─────── */
 function Hero() {
@@ -375,11 +346,18 @@ function Principles() {
 }
 
 /* ─────── PROJECTS ─────── */
-function Projects({
-  featured,
-}: {
-  featured: typeof fallbackProjects;
-}) {
+interface FeaturedProject {
+  slug: string;
+  tag: string;
+  title: string;
+  description: string;
+  stat: string;
+  color: string;
+  asset: string;
+  year: string;
+}
+
+function Projects({ featured }: { featured: FeaturedProject[] }) {
   return (
     <section
       className={PAD_X}

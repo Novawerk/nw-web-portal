@@ -65,7 +65,7 @@ export function Header() {
         href="/community"
         className="inline-flex items-center gap-2 rounded-full border border-foreground bg-foreground px-4 py-2.5 font-mono text-[12px] uppercase tracking-[0.06em] text-background transition-colors hover:border-accent hover:bg-accent"
       >
-        Join
+        Pitch an idea
         <ArrowRight className="size-3.5" />
       </Link>
     </header>
