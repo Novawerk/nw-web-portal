@@ -164,28 +164,27 @@ function Hero() {
   return (
     <section
       className={`relative isolate overflow-hidden border-b border-border ${PAD_X}`}
-      style={{ paddingTop: "clamp(60px, 8vw, 120px)", paddingBottom: "clamp(48px, 6vw, 96px)" }}
+      style={{ paddingTop: "clamp(28px, 3.5vw, 56px)", paddingBottom: "clamp(36px, 4vw, 64px)" }}
     >
       <HeroBlob />
 
-      <div className="mb-12 flex flex-col items-start justify-between gap-3 md:flex-row md:items-center md:[margin-bottom:clamp(48px,8vw,96px)]">
+      <div className="mb-8 flex flex-col items-start justify-between gap-3 md:mb-12 md:flex-row md:items-center">
         <Eyebrow>A non-profit community · est. 2025</Eyebrow>
         <div className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted">
-          [N°001] · Index
+          [N°001] · Spring 2025
         </div>
       </div>
 
       <HeroTitle />
 
-      <div className="mt-12 grid gap-10 md:mt-20 md:grid-cols-[1.2fr_1fr] md:items-end md:gap-[60px]">
-        <div>
-          <p className="max-w-[50ch] text-[15px] leading-[1.6] text-foreground/85 md:text-lg">
-            Novawerk is an open, non-profit community hub. We believe innovation
-            shouldn&apos;t chase trends — it should create real value for the
-            world. Here, anyone can bring an idea, find collaborators, and turn
-            it into a real project.
+      <div className="mt-8 grid gap-10 md:mt-10 md:grid-cols-[1.35fr_1fr] md:items-end md:gap-[72px]">
+        <div className="flex flex-col gap-7">
+          <p className="max-w-[44ch] text-[15px] leading-[1.6] text-foreground/85 md:text-lg">
+            Novawerk is an open, non-profit community hub. Bring an idea,
+            find collaborators, and turn it into something the world can
+            actually use.
           </p>
-          <div className="mt-7 flex flex-wrap gap-3.5">
+          <div className="flex flex-wrap gap-3.5">
             <Link
               href="/community"
               className="inline-flex items-center gap-2.5 rounded-full bg-accent px-[22px] py-3.5 font-mono text-[13px] uppercase tracking-[0.04em] text-background transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-foreground"
@@ -202,30 +201,17 @@ function Hero() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
-          <div className="rounded-md border border-dashed border-border-strong p-[18px] text-center">
-            <div className="font-display text-[44px] font-bold leading-none tracking-[-0.03em] text-accent">
-              N+1
-            </div>
-            <div className="mt-1 font-mono text-[11px] uppercase tracking-[0.06em] leading-[1.5] text-muted">
-              The next project
-              <br />
-              could be yours
-            </div>
+        <div className="flex flex-col items-start gap-3 md:items-end md:text-right">
+          <NovaStar size={22} fill="var(--color-accent)" />
+          <div className="font-display font-bold leading-[0.85] tracking-[-0.04em] text-foreground text-[clamp(96px,12vw,176px)]">
+            N<span className="text-accent">+1</span>
           </div>
-          <ul className="m-0 flex list-none flex-col gap-2 p-0 font-mono text-[12px] uppercase tracking-[0.04em] text-foreground">
-            {["Validate ideas", "Break it down", "Find collaborators", "Build · learn · ship"].map(
-              (item, i) => (
-                <li
-                  key={item}
-                  className="grid grid-cols-[30px_1fr] border-t border-border pt-2 last:border-b last:pb-2"
-                >
-                  <span className="text-accent">0{i + 1}</span>
-                  {item}
-                </li>
-              ),
-            )}
-          </ul>
+          <p className="max-w-[22ch] font-mono text-[11px] uppercase tracking-[0.08em] leading-[1.55] text-muted">
+            <span className="text-foreground/90">n.</span> the next one to
+            step in.
+            <br />
+            could be you.
+          </p>
         </div>
       </div>
 
@@ -241,7 +227,8 @@ function Hero() {
 function WhatWeDo() {
   return (
     <section
-      className={`${PAD_X}`}
+      id="what-we-do"
+      className={`scroll-mt-24 ${PAD_X}`}
       style={{ paddingTop: "clamp(80px, 9vw, 160px)", paddingBottom: "clamp(80px, 9vw, 160px)" }}
     >
       <Reveal>
@@ -281,7 +268,8 @@ function WhatWeDo() {
 function Principles() {
   return (
     <section
-      className="border-y border-border"
+      id="principles"
+      className="scroll-mt-24 border-y border-border"
       style={{
         background: "var(--color-paper)",
         paddingTop: "clamp(80px, 9vw, 160px)",
@@ -360,7 +348,8 @@ interface FeaturedProject {
 function Projects({ featured }: { featured: FeaturedProject[] }) {
   return (
     <section
-      className={PAD_X}
+      id="portfolio"
+      className={`scroll-mt-24 ${PAD_X}`}
       style={{ paddingTop: "clamp(80px, 9vw, 160px)", paddingBottom: "clamp(80px, 9vw, 160px)" }}
     >
       <Reveal>
@@ -428,7 +417,8 @@ function Projects({ featured }: { featured: FeaturedProject[] }) {
 function Numbers() {
   return (
     <section
-      className="bg-foreground text-background"
+      id="numbers"
+      className="scroll-mt-24 bg-foreground text-background"
       style={{
         paddingTop: "clamp(80px, 9vw, 160px)",
         paddingBottom: "clamp(80px, 9vw, 160px)",
@@ -464,7 +454,8 @@ function Numbers() {
 function Manifesto() {
   return (
     <section
-      className="border-y border-border"
+      id="manifesto"
+      className="scroll-mt-24 border-y border-border"
       style={{
         background: "var(--color-paper)",
         paddingTop: "clamp(80px, 9vw, 160px)",
@@ -525,7 +516,8 @@ function BlogTeaser({
 }) {
   return (
     <section
-      className={PAD_X}
+      id="field-notes"
+      className={`scroll-mt-24 ${PAD_X}`}
       style={{ paddingTop: "clamp(80px, 9vw, 160px)", paddingBottom: "clamp(80px, 9vw, 160px)" }}
     >
       <Reveal>
@@ -580,7 +572,8 @@ function BlogTeaser({
 function HowToJoin() {
   return (
     <section
-      className={PAD_X}
+      id="join"
+      className={`scroll-mt-24 ${PAD_X}`}
       style={{ paddingTop: "clamp(80px, 9vw, 160px)", paddingBottom: "clamp(80px, 9vw, 160px)" }}
     >
       <Reveal>
