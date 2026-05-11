@@ -48,7 +48,7 @@ async function main() {
         slug,
         excerpt: data.excerpt ?? "",
         publishedDate: data.date,
-        author: data.author ?? "NovaWerk",
+        author: data.author ?? "Novawerk",
         tags: ((data.tags ?? []) as string[]).map((tag) => ({ tag })),
         content,
         status: "published",

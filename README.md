@@ -1,4 +1,4 @@
-# NovaWerk Web Portal
+# Novawerk Web Portal
 
 > *Not profitable, but meaningful.*
 
@@ -145,7 +145,7 @@ Set in **Vercel → Settings → Environment Variables** (Production + Preview +
 | `BLOB_READ_WRITE_TOKEN` | Vercel Blob token (Vercel → Storage → Blob) | Media uploads |
 | `RESEND_API_KEY` | Resend API key — domain `novawerk.io` must be verified | Contact + newsletter emails |
 | `CONTACT_TO_EMAIL` | Where contact applications are emailed | Contact form |
-| `CONTACT_FROM_EMAIL` | Verified Resend "from" address (default: `NovaWerk <info@novawerk.io>`) | Contact form |
+| `CONTACT_FROM_EMAIL` | Verified Resend "from" address (default: `Novawerk <info@novawerk.io>`) | Contact form |
 | `NEXT_PUBLIC_SERVER_URL` | Public app URL (Payload callbacks, OG images) | Always |
 | `NEXT_PUBLIC_SITE_URL` | Public site URL (metadata, sitemap) | Always |
 
@@ -183,9 +183,9 @@ For first-time deploy elsewhere:
 
 ---
 
-## About NovaWerk
+## About Novawerk
 
-NovaWerk is an open, non-profit community hub focused on creating real positive change in society through collaboration, creativity, and action.
+Novawerk is an open, non-profit community hub focused on creating real positive change in society through collaboration, creativity, and action.
 
 **Vision** — to build an open space that empowers people to transform meaningful ideas into positive change for society.
 

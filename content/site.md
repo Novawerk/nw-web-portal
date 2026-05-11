@@ -1,4 +1,4 @@
-# NovaWerk — Site content
+# Novawerk — Site content
 
 Single source-of-truth for everything visible on novawerk.io: brand, IA, page-by-page copy, visual language, and forms. Copy here is the canonical English shipped on the live site (see `app/(frontend)/`). Dynamic content (blog posts, portfolio items, team members) is managed in Payload at `/admin` and is *not* duplicated here.
 
@@ -25,7 +25,7 @@ Single source-of-truth for everything visible on novawerk.io: brand, IA, page-by
 | # | Title | Long-form |
 |---|---|---|
 | 01 | **Purposeful Innovation** | We believe innovation should create real positive change for people and society. Rather than following short-term trends or simple replication, we value meaningful ideas, thoughtful execution, and long-term contribution through real action. |
-| 02 | **Build, Learn, Together** | NovaWerk is an open community where people come together to learn, build, and grow through practical collaboration and real projects. We welcome individuals from different backgrounds, experiences, and skill levels who share a desire to create positive change together. |
+| 02 | **Build, Learn, Together** | Novawerk is an open community where people come together to learn, build, and grow through practical collaboration and real projects. We welcome individuals from different backgrounds, experiences, and skill levels who share a desire to create positive change together. |
 | 03 | **Responsibility for Positive Change** | We believe everyone shares a responsibility to contribute positively to society through their actions, ideas, and participation. Positive change begins when people choose to care, contribute, and take responsibility instead of remaining indifferent or inactive. |
 
 Short-form versions used on the home page:
@@ -48,7 +48,7 @@ Short-form versions used on the home page:
 | Route | Page | One-liner |
 |---|---|---|
 | `/` | Home | Manifesto + featured projects + CTA |
-| `/about` | About | Why NovaWerk exists, how we operate, principles |
+| `/about` | About | Why Novawerk exists, how we operate, principles |
 | `/portfolio` | Portfolio index | All non-archived projects |
 | `/portfolio/[slug]` | Portfolio detail | Project body + members + gallery |
 | `/blog` | Blog index | Field notes & build logs |
@@ -58,9 +58,9 @@ Short-form versions used on the home page:
 
 ### Navigation
 
-**Header** — left: NovaWerk wordmark with accent dot. Center (desktop only): About · Portfolio · Community · Blog. Right: "Join Us" pill button → `/community`.
+**Header** — left: Novawerk wordmark with accent dot. Center (desktop only): About · Portfolio · Community · Blog. Right: "Join Us" pill button → `/community`.
 
-**Footer** — Big tagline ("Not profitable, but meaningful."), "Join NovaWerk →" pill, copyright + secondary links (About · Portfolio · Blog).
+**Footer** — Big tagline ("Not profitable, but meaningful."), "Join Novawerk →" pill, copyright + secondary links (About · Portfolio · Blog).
 
 ---
 
@@ -79,7 +79,7 @@ Sections are numbered editorial-style (`001 / Manifesto`, etc.) — the number l
   - We don't chase scale.
   - We don't chase trends.
   - We build things that matter — *together*.
-- Sub-paragraph: NovaWerk is an open, non-profit community hub. Bring an idea, bring yourself.
+- Sub-paragraph: Novawerk is an open, non-profit community hub. Bring an idea, bring yourself.
 - CTA: **Join the workshop →** `/community`
 - Footer of section: animated "Scroll ↓" indicator
 
@@ -105,11 +105,11 @@ Sections are numbered editorial-style (`001 / Manifesto`, etc.) — the number l
 **006 / Get involved** — dark CTA card.
 
 - Heading: Have a meaningful idea? *Let's make it real.*
-- Buttons: **Join NovaWerk →** `/community` · **Get in touch** → `/community#contact`
+- Buttons: **Join Novawerk →** `/community` · **Get in touch** → `/community#contact`
 
 ### `/about`
 
-**Hero** — Eyebrow `About` · H1 *Why NovaWerk* exists. · Lead paragraph:
+**Hero** — Eyebrow `About` · H1 *Why Novawerk* exists. · Lead paragraph:
 
 > We are an open, non-profit community hub focused on creating real positive change in society. Great ideas should not remain as concepts — and positive change happens when people come together to build, learn, and collaborate.
 
@@ -159,7 +159,7 @@ Sections (numbered):
 
 **Hero** — Eyebrow `Community` · H1 Build with *us*.
 
-> NovaWerk is open. If you have a meaningful idea, want to learn by building, or want to contribute to projects that matter — there's a place for you here.
+> Novawerk is open. If you have a meaningful idea, want to learn by building, or want to contribute to projects that matter — there's a place for you here.
 
 **How to get involved** — 2×2 grid:
 
@@ -246,7 +246,7 @@ Both forms validate with Zod (`lib/schemas.ts`), submit JSON, and write to Paylo
 
 Interest options: *Building apps & products · Research & exploration · Design & storytelling · Community organizing · Writing & thinking · Other.*
 
-On success: writes a `contact-submissions` row (status `new`) and emails `CONTACT_TO_EMAIL` from `CONTACT_FROM_EMAIL` (default `NovaWerk <info@novawerk.io>`), with `replyTo` set to the submitter.
+On success: writes a `contact-submissions` row (status `new`) and emails `CONTACT_TO_EMAIL` from `CONTACT_FROM_EMAIL` (default `Novawerk <info@novawerk.io>`), with `replyTo` set to the submitter.
 
 ### Newsletter form — `POST /api/newsletter`
 

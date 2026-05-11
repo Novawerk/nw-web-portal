@@ -9,9 +9,9 @@ import { fallbackPortfolioItems } from "@/lib/portfolio-fallback";
 const PAD_X = "px-7 md:px-12 lg:px-20";
 
 export const metadata = {
-  title: "Portfolio — NovaWerk",
+  title: "Portfolio — Novawerk",
   description:
-    "What's happening at NovaWerk right now. Not a showcase — a worksite. Every entry is still being improved.",
+    "What's happening at Novawerk right now. Not a showcase — a worksite. Every entry is still being improved.",
 };
 
 // Revalidate every 5 minutes so CMS edits show up without a redeploy.

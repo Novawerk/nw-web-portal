@@ -41,7 +41,7 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NovaWerk — Not profitable, but meaningful.",
+  title: "Novawerk — Not profitable, but meaningful.",
   description:
     "An open, non-profit community hub focused on creating real positive change in society through collaboration, creativity, and action.",
 };

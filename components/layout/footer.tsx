@@ -36,7 +36,7 @@ export function Footer() {
             .
           </p>
           <p className="mt-7 max-w-md text-sm leading-relaxed text-background/70">
-            NovaWerk is an open, non-profit community where people validate
+            Novawerk is an open, non-profit community where people validate
             ideas together, build with each other, pick up real skills, and
             push things that matter to the next step.
           </p>
@@ -48,7 +48,7 @@ export function Footer() {
       </div>
 
       <div className="flex flex-col gap-3 pt-6 font-mono text-[11px] uppercase tracking-[0.06em] text-background/55 md:flex-row md:justify-between">
-        <span>© {new Date().getFullYear()} NovaWerk · Non-profit community</span>
+        <span>© {new Date().getFullYear()} Novawerk · Non-profit community</span>
         <span>Built by the community · Not for profit, for purpose.</span>
       </div>
     </footer>

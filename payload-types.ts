@@ -330,7 +330,7 @@ export interface TeamMember {
    */
   role: string;
   /**
-   * Short paragraph about what they do at NovaWerk.
+   * Short paragraph about what they do at Novawerk.
    */
   bio?: string | null;
   photo?: (number | null) | Media;

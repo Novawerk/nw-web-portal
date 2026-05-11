@@ -6,9 +6,9 @@ import { ContactForm } from "@/components/forms/contact-form";
 const PAD_X = "px-7 md:px-12 lg:px-20";
 
 export const metadata = {
-  title: "Join Us — NovaWerk",
+  title: "Join Us — Novawerk",
   description:
-    "Indifference is the only failure. Join NovaWerk to validate ideas, build with collaborators, and ship things that matter.",
+    "Indifference is the only failure. Join Novawerk to validate ideas, build with collaborators, and ship things that matter.",
 };
 
 const PLEDGE = [
