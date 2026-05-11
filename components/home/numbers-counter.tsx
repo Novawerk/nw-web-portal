@@ -6,16 +6,29 @@ interface Stat {
   value: number;
   suffix?: string;
   label: string;
+  tooltip?: string;
 }
 
-const stats: Stat[] = [
-  { value: 412, suffix: "+", label: "Members" },
-  { value: 27, label: "Building" },
-  { value: 14, label: "Shipped" },
-  { value: 38, label: "Workshops" },
-];
+export function NumbersGrid({
+  blogCount,
+  buildingCount,
+}: {
+  blogCount: number;
+  buildingCount: number;
+}) {
+  const stats: Stat[] = [
+    {
+      value: 2,
+      suffix: "?",
+      label: "Members",
+      tooltip:
+        "OK, technically 2 humans — plus ~20 AI agents pulling the night shift. They run on tokens, not coffee.",
+    },
+    { value: buildingCount, label: "Building" },
+    { value: blogCount, label: "Field Notes" },
+    { value: 0, label: "Workshops" },
+  ];
 
-export function NumbersGrid() {
   const ref = useRef<HTMLDivElement>(null);
   const [seen, setSeen] = useState(false);
 
@@ -77,11 +90,56 @@ function CountStat({
     <div className="flex flex-col gap-1">
       <div className="font-display text-[clamp(72px,10vw,160px)] font-bold leading-[0.9] tracking-[-0.05em]">
         {v}
-        {stat.suffix ?? ""}
+        {stat.suffix && stat.tooltip ? (
+          <TooltipSuffix suffix={stat.suffix} tooltip={stat.tooltip} />
+        ) : (
+          (stat.suffix ?? "")
+        )}
       </div>
       <div className="font-mono text-xs uppercase tracking-[0.06em] text-background/65">
         {stat.label}
       </div>
     </div>
+  );
+}
+
+function TooltipSuffix({
+  suffix,
+  tooltip,
+}: {
+  suffix: string;
+  tooltip: string;
+}) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <span className="relative inline-block align-top">
+      <button
+        type="button"
+        aria-label="What's the catch?"
+        onMouseEnter={() => setOpen(true)}
+        onMouseLeave={() => setOpen(false)}
+        onFocus={() => setOpen(true)}
+        onBlur={() => setOpen(false)}
+        onClick={() => setOpen((o) => !o)}
+        className="cursor-help bg-transparent p-0 italic text-[color:var(--color-yellow)] transition-transform hover:-translate-y-0.5"
+        style={{ font: "inherit", lineHeight: "inherit" }}
+      >
+        {suffix}
+      </button>
+      <span
+        role="tooltip"
+        className={`pointer-events-none absolute left-1/2 top-full z-20 mt-3 w-[min(20rem,70vw)] -translate-x-1/2 rounded-md bg-background px-4 py-3 text-left font-mono text-[12px] normal-case leading-snug tracking-normal text-foreground shadow-[0_12px_40px_rgba(0,0,0,0.25)] transition duration-150 ${
+          open
+            ? "translate-y-0 opacity-100"
+            : "-translate-y-1 opacity-0"
+        }`}
+      >
+        <span className="block text-[10px] uppercase tracking-[0.12em] text-foreground/55">
+          Plot twist
+        </span>
+        <span className="mt-1 block">{tooltip}</span>
+      </span>
+    </span>
   );
 }

@@ -7,7 +7,7 @@ import { HeroBlob } from "@/components/home/hero-blob";
 import { HeroTitle } from "@/components/home/hero-title";
 import { NumbersGrid } from "@/components/home/numbers-counter";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { getFeaturedPortfolioItems } from "@/lib/portfolio";
+import { getAllPortfolioItems, getFeaturedPortfolioItems } from "@/lib/portfolio";
 import { fallbackPortfolioItems } from "@/lib/portfolio-fallback";
 import { getAllPosts, formatDate } from "@/lib/blog";
 import { fallbackBlogPosts } from "@/lib/blog-fallback";
@@ -104,13 +104,23 @@ const marqueeItems = [
 export default async function Home() {
   // The home page can render without the CMS — fall back to demo content if
   // Payload can't reach the database (local dev without .env.local, etc).
-  const [featuredCmsResult, postsResult] = await Promise.allSettled([
-    getFeaturedPortfolioItems(),
-    getAllPosts(),
-  ]);
+  const [featuredCmsResult, postsResult, portfolioResult] =
+    await Promise.allSettled([
+      getFeaturedPortfolioItems(),
+      getAllPosts(),
+      getAllPortfolioItems(),
+    ]);
   const featuredCms =
     featuredCmsResult.status === "fulfilled" ? featuredCmsResult.value : [];
   const posts = postsResult.status === "fulfilled" ? postsResult.value : [];
+  const allPortfolio =
+    portfolioResult.status === "fulfilled" ? portfolioResult.value : [];
+  const portfolioForCounts = allPortfolio.length
+    ? allPortfolio
+    : fallbackPortfolioItems;
+  const buildingCount = portfolioForCounts.filter(
+    (p) => p.status === "building" || p.status === "planning",
+  ).length;
 
   const featuredSource = featuredCms.length
     ? featuredCms
@@ -140,7 +150,10 @@ export default async function Home() {
       <WhatWeDo />
       <Principles />
       <Projects featured={featured} />
-      <Numbers />
+      <Numbers
+        blogCount={posts.length || fallbackBlogPosts.length}
+        buildingCount={buildingCount}
+      />
       <Manifesto />
       <BlogTeaser
         posts={recentPosts.map((p) => ({
@@ -425,7 +438,13 @@ function Projects({ featured }: { featured: FeaturedProject[] }) {
 }
 
 /* ─────── NUMBERS ─────── */
-function Numbers() {
+function Numbers({
+  blogCount,
+  buildingCount,
+}: {
+  blogCount: number;
+  buildingCount: number;
+}) {
   return (
     <section
       className="bg-foreground text-background"
@@ -454,7 +473,7 @@ function Numbers() {
           </div>
         </Reveal>
 
-        <NumbersGrid />
+        <NumbersGrid blogCount={blogCount} buildingCount={buildingCount} />
       </div>
     </section>
   );
