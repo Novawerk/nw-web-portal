@@ -31,7 +31,7 @@ export async function generateMetadata({
   const post = await loadPost(slug);
   if (!post) return {};
   return {
-    title: `${post.title} — NovaWerk`,
+    title: `${post.title} — Novawerk`,
     description: post.excerpt,
   };
 }
@@ -139,10 +139,10 @@ export default async function BlogPostPage({
             </div>
             <div>
               <div className="font-display text-base font-semibold tracking-[-0.01em]">
-                {post.author ?? "NovaWerk"}
+                {post.author ?? "Novawerk"}
               </div>
               <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted">
-                Contributor · NovaWerk
+                Contributor · Novawerk
               </div>
             </div>
           </div>
@@ -189,7 +189,7 @@ export default async function BlogPostPage({
           <div className="nw-sig">
             <div className="nw-sig__rule" />
             <p className="nw-sig__text">
-              <em>— Written for the NovaWerk community.</em>
+              <em>— Written for the Novawerk community.</em>
               <br />
               If you got something out of this, the most useful thing you can do
               is forward it to one person who would also care.
@@ -213,11 +213,11 @@ export default async function BlogPostPage({
         <div>
           <Eyebrow>Written by</Eyebrow>
           <h3 className="m-0 mt-2 font-display text-[32px] font-semibold tracking-[-0.02em]">
-            {post.author ?? "NovaWerk"}
+            {post.author ?? "Novawerk"}
           </h3>
           <p className="m-0 mt-2 max-w-[60ch] text-base leading-[1.6] text-foreground/85">
             Writes about how things actually get made — methods, mistakes,
-            retrospectives. Has been part of NovaWerk since the early open days.
+            retrospectives. Has been part of Novawerk since the early open days.
           </p>
         </div>
         <Link
@@ -263,7 +263,7 @@ export default async function BlogPostPage({
                     </p>
                   )}
                   <div className="mt-auto pt-2 font-mono text-[11px] uppercase tracking-[0.04em] text-muted">
-                    {r.author ?? "NovaWerk"} · {readTime(r.content)} min
+                    {r.author ?? "Novawerk"} · {readTime(r.content)} min
                   </div>
                 </Link>
               </Reveal>

@@ -76,7 +76,7 @@ export const BlogPosts: CollectionConfig = {
     {
       name: "author",
       type: "text",
-      defaultValue: "NovaWerk",
+      defaultValue: "Novawerk",
       admin: { position: "sidebar" },
     },
     {

@@ -109,7 +109,7 @@ ColdChain Watch is a small box and a smaller app that gives the shop owner two n
 
 The device is a clamp-on current meter and a tiny LTE modem. Owner installs it themselves in under 10 minutes — no electrician needed. Data syncs every 15 minutes; nothing personal ever leaves the shop, just numbers.
 
-Hardware BOM: under $40. We sell at cost; the project is run by NovaWerk volunteers and one part-time hardware engineer.
+Hardware BOM: under $40. We sell at cost; the project is run by Novawerk volunteers and one part-time hardware engineer.
 
 ## Get involved
 

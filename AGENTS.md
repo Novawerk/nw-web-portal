@@ -4,7 +4,7 @@
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
 
-# NovaWerk web portal — agent guide
+# Novawerk web portal — agent guide
 
 Stack at a glance: **Next.js 16 App Router** + **React 19** + **Payload v3** + **Postgres (Neon)** + **Tailwind v4** + **Vercel Blob**. Package manager is **pnpm** (see `pnpm-workspace.yaml`).
 

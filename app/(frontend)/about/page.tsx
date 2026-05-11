@@ -10,7 +10,7 @@ const principles = [
   {
     num: "02",
     title: "Build, Learn, Together",
-    body: "NovaWerk is an open community where people come together to learn, build, and grow through practical collaboration and real projects. We welcome individuals from different backgrounds, experiences, and skill levels who share a desire to create positive change together.",
+    body: "Novawerk is an open community where people come together to learn, build, and grow through practical collaboration and real projects. We welcome individuals from different backgrounds, experiences, and skill levels who share a desire to create positive change together.",
   },
   {
     num: "03",
@@ -31,7 +31,7 @@ export default function AboutPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="mt-4 font-display text-5xl leading-[0.95] md:text-7xl">
-              Why NovaWerk{" "}
+              Why Novawerk{" "}
               <span className="italic text-accent">exists</span>.
             </h1>
           </Reveal>
@@ -58,7 +58,7 @@ export default function AboutPage() {
               </h2>
             </div>
             <div className="space-y-4 text-lg leading-relaxed text-muted md:col-span-7 md:col-start-6">
-              <p>NovaWerk exists to lower the barriers to creating positive change — helping people:</p>
+              <p>Novawerk exists to lower the barriers to creating positive change — helping people:</p>
               <ul className="space-y-3 pl-0">
                 <li className="flex gap-4 border-t border-border/60 pt-3">
                   <span className="text-muted-foreground">→</span>

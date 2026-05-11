@@ -180,7 +180,7 @@ function Hero() {
       <div className="mt-12 grid gap-10 md:mt-20 md:grid-cols-[1.2fr_1fr] md:items-end md:gap-[60px]">
         <div>
           <p className="max-w-[50ch] text-[15px] leading-[1.6] text-foreground/85 md:text-lg">
-            NovaWerk is an open, non-profit community hub. We believe innovation
+            Novawerk is an open, non-profit community hub. We believe innovation
             shouldn&apos;t chase trends — it should create real value for the
             world. Here, anyone can bring an idea, find collaborators, and turn
             it into a real project.
@@ -489,7 +489,7 @@ function Manifesto() {
             </p>
             <p className="m-0 font-display text-[clamp(28px,3.4vw,48px)] font-medium leading-[1.18] tracking-[-0.02em]">
               <em className="font-serif font-normal italic text-accent">
-                NovaWerk is that place
+                Novawerk is that place
               </em>
               : a group of ordinary people who decided to put a small slice of
               their time and ability into things that{" "}

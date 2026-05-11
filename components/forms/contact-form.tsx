@@ -145,7 +145,7 @@ export function ContactForm() {
 
           <div className="flex flex-col gap-2">
             <label htmlFor="motivation" className={labelClass}>
-              <span>Why do you want to join NovaWerk?</span>
+              <span>Why do you want to join Novawerk?</span>
               <span className={stepClass}>04 / 06</span>
             </label>
             <textarea

@@ -70,7 +70,7 @@ export async function generateMetadata({
   const item = await loadItem(slug);
   if (!item) return {};
   return {
-    title: `${item.title} — NovaWerk`,
+    title: `${item.title} — Novawerk`,
     description: item.tagline || item.description,
   };
 }
@@ -106,7 +106,7 @@ export default async function PortfolioDetailPage({
   const milestones = [
     {
       date: "Q4 2024",
-      text: `${item.title} idea pitched at a NovaWerk open day. First collaborators commit a Saturday afternoon.`,
+      text: `${item.title} idea pitched at a Novawerk open day. First collaborators commit a Saturday afternoon.`,
     },
     {
       date: "Q1 2025",
@@ -280,7 +280,7 @@ export default async function PortfolioDetailPage({
           ) : (
             <>
               <p>
-                {item.description} The premise of NovaWerk is that a small
+                {item.description} The premise of Novawerk is that a small
                 group of ordinary people, with the right structure around them,
                 can keep working on a problem long enough to make a real dent.
                 {" "}

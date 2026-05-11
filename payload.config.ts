@@ -24,7 +24,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
     meta: {
-      titleSuffix: " — NovaWerk CMS",
+      titleSuffix: " — Novawerk CMS",
     },
   },
   collections: [

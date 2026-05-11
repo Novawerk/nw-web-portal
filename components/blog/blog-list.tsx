@@ -105,7 +105,7 @@ export function BlogList({ posts }: BlogListProps) {
               </p>
             )}
             <div className="mt-auto pt-2 font-mono text-[11px] uppercase tracking-[0.04em] text-muted">
-              {p.author ?? "NovaWerk"} · {readTime(p.content)} min
+              {p.author ?? "Novawerk"} · {readTime(p.content)} min
             </div>
           </article>
         ))}

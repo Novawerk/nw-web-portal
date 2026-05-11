@@ -31,7 +31,7 @@ export const TeamMembers: CollectionConfig = {
       name: "bio",
       type: "textarea",
       admin: {
-        description: "Short paragraph about what they do at NovaWerk.",
+        description: "Short paragraph about what they do at Novawerk.",
       },
     },
     {

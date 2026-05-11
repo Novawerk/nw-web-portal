@@ -11,9 +11,9 @@ import { fallbackBlogPosts } from "@/lib/blog-fallback";
 const PAD_X = "px-7 md:px-12 lg:px-20";
 
 export const metadata = {
-  title: "Blog — NovaWerk",
+  title: "Blog — Novawerk",
   description:
-    "Field notes from the NovaWerk workshop. Methods, mistakes, retros, and conversations as they happen.",
+    "Field notes from the Novawerk workshop. Methods, mistakes, retros, and conversations as they happen.",
 };
 
 // Revalidate every 5 minutes so CMS edits show up without a redeploy.
@@ -136,7 +136,7 @@ function FeaturedPost({ post }: { post: BlogPost }) {
             </p>
           )}
           <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted">
-            {post.author ?? "NovaWerk"} · {readTime(post.content)} min read
+            {post.author ?? "Novawerk"} · {readTime(post.content)} min read
           </div>
           <div className="mt-2">
             <Link
@@ -203,7 +203,7 @@ function NewsletterSection() {
           <div className="nw-dispatch__bar grid grid-cols-2 gap-3 border-b border-background/15 px-8 py-5 font-mono text-[11px] uppercase tracking-[0.08em] text-background/55 md:grid-cols-4 md:px-12">
             <span className="inline-flex items-center gap-2">
               <span className="inline-block size-2 rounded-full bg-accent" />
-              NovaWerk · Dispatch
+              Novawerk · Dispatch
             </span>
             <span className="hidden md:inline">Issue №14</span>
             <span className="hidden md:inline">May · 2026</span>
