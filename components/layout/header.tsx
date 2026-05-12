@@ -10,7 +10,7 @@ const tabs = [
   { href: "/", label: "Home", num: "01" },
   { href: "/portfolio", label: "Portfolio", num: "02" },
   { href: "/blog", label: "Blog", num: "03" },
-  { href: "/community", label: "AI-Native Community", num: "04" },
+  { href: "/community", label: "AI-Native", num: "04" },
 ];
 
 function isActive(pathname: string, href: string): boolean {
@@ -35,7 +35,7 @@ export function Header() {
           NOVAWERK
         </span>
         <span className="ml-1 hidden font-mono text-[11px] uppercase tracking-[0.08em] text-muted md:inline">
-          ⌐ Community · Est. 2025
+          ⌐ AI-Native Non-Profit Community · Est. 2025
         </span>
       </Link>
 
