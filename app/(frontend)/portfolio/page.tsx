@@ -70,7 +70,7 @@ export default async function PortfolioPage() {
             <p className="max-w-[44ch] font-display text-[clamp(28px,3vw,40px)] font-medium leading-[1.18] tracking-[-0.02em] text-foreground/70">
               The first projects are being scoped right now. Come back soon —
               or{" "}
-              <Link href="/community" className="link-underline text-accent">
+              <Link href="#join" className="link-underline text-accent">
                 bring an idea yourself
               </Link>
               .
@@ -99,7 +99,7 @@ export default async function PortfolioPage() {
               </p>
             </div>
             <Link
-              href="/community"
+              href="#join"
               className="inline-flex items-center gap-2.5 rounded-full bg-accent px-[22px] py-3.5 font-mono text-[13px] uppercase tracking-[0.04em] text-background transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-foreground"
             >
               Submit an idea

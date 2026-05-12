@@ -221,7 +221,7 @@ export default async function BlogPostPage({
           </p>
         </div>
         <Link
-          href="/community"
+          href="#join"
           className="inline-flex items-center gap-2.5 self-start rounded-full border border-foreground px-5 py-3 font-mono text-[12px] uppercase tracking-[0.06em] text-foreground transition-colors hover:bg-foreground hover:text-background md:self-center"
         >
           Get in touch →

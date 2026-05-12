@@ -10,6 +10,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { SmoothScroll } from "@/components/providers/smooth-scroll";
 import { CursorFollower } from "@/components/motion/cursor-follower";
+import { JoinSheet } from "@/components/join/join-sheet";
 
 const display = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -61,6 +62,7 @@ export default function RootLayout({
           <main className="flex-1">{children}</main>
           <Footer />
         </SmoothScroll>
+        <JoinSheet />
       </body>
     </html>
   );

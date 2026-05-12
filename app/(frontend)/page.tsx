@@ -199,7 +199,7 @@ function Hero() {
           </p>
           <div className="flex flex-wrap gap-3.5">
             <Link
-              href="/community"
+              href="#join"
               className="inline-flex items-center gap-2.5 rounded-full bg-accent px-[22px] py-3.5 font-mono text-[13px] uppercase tracking-[0.04em] text-background transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-foreground"
             >
               Join the community
@@ -611,7 +611,7 @@ function HowToJoin() {
         {paths.map((p, i) => (
           <Reveal key={p.num} delay={i * 0.08}>
             <Link
-              href="/community"
+              href="#join"
               className="group flex h-full flex-col gap-3 rounded-md border border-border-strong bg-background p-8 transition-all duration-300 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-[var(--color-paper)] hover:shadow-[6px_6px_0_var(--color-foreground)]"
             >
               <div className="font-serif text-[56px] italic leading-none text-accent">
