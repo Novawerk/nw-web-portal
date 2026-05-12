@@ -3,6 +3,10 @@ import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { NovaStar } from "@/components/icons/nova-star";
+import {
+  WorkflowFlipList,
+  type Workflow,
+} from "@/components/community/workflow-flip";
 
 const PAD_X = "px-7 md:px-12 lg:px-20";
 
@@ -12,59 +16,60 @@ export const metadata = {
     "How a non-profit community uses AI agents to run finance, comms, and ops — and which conversations we keep human.",
 };
 
-const CHALLENGES = [
+const WORKFLOWS: Workflow[] = [
   {
     tag: "Finance",
-    text: "Receipts, reimbursements, monthly close. The boring stuff that quietly eats a weekend every month.",
+    challenge: "Receipts. Reimbursements. Monthly close at 1am.",
+    agent: "Finance Agent",
+    role: "Bookkeeping & monthly close",
+    reads: "Receipts (PDF / photo), bank exports, expense submissions",
+    writes:
+      "Categorized ledger draft, monthly P&L, anomaly flags for the treasurer",
+    variant: "paper",
+    span: "md:col-span-3",
   },
   {
     tag: "Member ops",
-    text: "Onboarding, role changes, contribution tracking across four membership tiers and four chat platforms.",
+    challenge: "Four tiers, four chat apps, one mess.",
+    agent: "Member Agent",
+    role: "Onboarding, role changes, contribution log",
+    reads: "Join form submissions, contribution updates, event attendance",
+    writes:
+      "Member records (Notion), tier-change proposals, contribution log entries",
+    variant: "accent",
+    span: "md:col-span-3",
   },
   {
     tag: "Comms",
-    text: "Newsletter drafts, email replies, event recaps. Volunteers burn out on inbox triage before they get to do the actual work.",
+    challenge: "Newsletter. Replies. Recaps. Inbox triage forever.",
+    agent: "Comms Agent",
+    role: "Drafting newsletters, emails, replies",
+    reads: "Project updates, blog drafts, inbound member email",
+    writes:
+      "Newsletter draft, suggested reply, FAQ updates — always reviewed before send",
+    variant: "dark",
+    span: "md:col-span-2",
   },
   {
     tag: "Sponsor outreach",
-    text: "Researching the right contact, writing the first email, following up three weeks later. Multiplied by every partner pipeline.",
-  },
-  {
-    tag: "Venue scouting",
-    text: "Capacity, location, price, A/V, vibe. Comparing six options on a spreadsheet at midnight.",
-  },
-];
-
-const AGENTS = [
-  {
-    name: "Finance Agent",
-    role: "Bookkeeping & monthly close",
-    reads: "Receipts (PDF / photo), bank exports, expense submissions",
-    writes: "Categorized ledger draft, monthly P&L, anomaly flags for the treasurer",
-  },
-  {
-    name: "Member Agent",
-    role: "Onboarding, role changes, contribution log",
-    reads: "Join form submissions, contribution updates, event attendance",
-    writes: "Member records (Notion), tier-change proposals, contribution log entries",
-  },
-  {
-    name: "Comms Agent",
-    role: "Drafting newsletters, emails, replies",
-    reads: "Project updates, blog drafts, inbound member email",
-    writes: "Newsletter draft, suggested reply, FAQ updates — always reviewed before send",
-  },
-  {
-    name: "Sponsor Agent",
+    challenge: "Research. Email. Wait three weeks. Repeat.",
+    agent: "Sponsor Agent",
     role: "Outreach drafts & pipeline follow-up",
     reads: "Partner research, past correspondence, public company signals",
     writes: "Outreach drafts, follow-up reminders, pipeline status notes",
+    variant: "paper",
+    span: "md:col-span-2",
   },
   {
-    name: "Venue Agent",
+    tag: "Venue scouting",
+    challenge: "Capacity, location, price — compared at midnight.",
+    agent: "Venue Agent",
     role: "Venue search, comparison, prereqs",
     reads: "Event briefs, city/date, headcount, budget, prior venue notes",
-    writes: "Shortlist of 3–5 venues with side-by-side comparison & a recommendation",
+    writes:
+      "Shortlist of 3–5 venues with side-by-side comparison & a recommendation",
+    variant: "paper",
+    span: "md:col-span-2",
   },
 ];
 
@@ -91,42 +96,13 @@ const NEVER = [
   },
 ];
 
-const WEEK = [
-  {
-    when: "Mon",
-    who: "Member Agent",
-    body: "Syncs last week's new members into Notion, flags anyone overdue for a welcome touchpoint.",
-  },
-  {
-    when: "Tue",
-    who: "Finance Agent",
-    body: "Pulls bank exports, drafts category labels for incoming expenses. Treasurer skims and approves.",
-  },
-  {
-    when: "Wed",
-    who: "Comms Agent",
-    body: "Drafts the weekly newsletter from project updates. Editor reviews, edits, sends Thursday morning.",
-  },
-  {
-    when: "Thu",
-    who: "Sponsor Agent",
-    body: "Surfaces follow-ups due this week. Partner lead writes the actual replies — agent does the prep, not the persuasion.",
-  },
-  {
-    when: "Fri",
-    who: "Venue Agent",
-    body: "If there's an upcoming event, returns a shortlist with notes. Organizer picks, books, and tells the agent what worked.",
-  },
-];
-
 export default function CommunityPage() {
   return (
     <>
       <Hero />
-      <Challenges />
-      <AgentStack />
+      <ChallengesToAgents />
       <NeverDelegate />
-      <HowItRuns />
+      <WhyThisWay />
       <ClosingCTA />
     </>
   );
@@ -208,8 +184,8 @@ function Hero() {
   );
 }
 
-/* ─── CHALLENGES ─── */
-function Challenges() {
+/* ─── CHALLENGES → AGENTS (FLIP-CARD GRID) ─── */
+function ChallengesToAgents() {
   return (
     <section
       className={`${PAD_X}`}
@@ -218,104 +194,29 @@ function Challenges() {
         paddingBottom: "clamp(80px, 9vw, 160px)",
       }}
     >
-      <div className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16">
-        <Reveal>
-          <Eyebrow>What we&apos;re up against</Eyebrow>
-          <h2 className="mt-4 font-display text-[clamp(32px,4vw,56px)] font-bold leading-none tracking-[-0.03em]">
-            The admin
-            <br />
-            <em className="font-serif font-normal italic text-accent">
-              never stops
-            </em>
-            .
-          </h2>
-          <p className="mt-4 max-w-[36ch] text-sm leading-[1.6] text-foreground/80">
-            Five categories of recurring work that used to eat a volunteer&apos;s
-            evening. We mapped each one to an agent — not to replace the human,
-            but to take the first 80% off the human&apos;s plate.
-          </p>
-        </Reveal>
-
-        <ul className="m-0 list-none border-t border-foreground p-0">
-          {CHALLENGES.map((c, i) => (
-            <Reveal as="li" key={c.tag} delay={i * 0.04}>
-              <div className="grid grid-cols-[110px_1fr] items-start gap-5 border-b border-border py-6 transition-[padding] hover:pl-3 md:grid-cols-[160px_1fr] md:gap-8 md:py-7">
-                <div className="font-mono text-[11px] uppercase tracking-[0.1em] text-accent">
-                  {c.tag}
-                </div>
-                <p className="m-0 text-[15px] leading-[1.6] text-foreground/85 md:text-base">
-                  {c.text}
-                </p>
-              </div>
-            </Reveal>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
-}
-
-/* ─── AGENT STACK ─── */
-function AgentStack() {
-  return (
-    <section
-      className={`border-t border-border ${PAD_X}`}
-      style={{
-        background: "var(--color-paper)",
-        paddingTop: "clamp(80px, 9vw, 160px)",
-        paddingBottom: "clamp(80px, 9vw, 160px)",
-      }}
-    >
       <Reveal>
-        <div className="mb-12 flex flex-wrap items-end justify-between gap-4">
+        <div className="mb-12 flex flex-wrap items-end justify-between gap-6 md:mb-14">
           <div>
-            <Eyebrow>The stack</Eyebrow>
-            <h2 className="mt-4 font-display text-[clamp(36px,4.5vw,64px)] font-bold leading-[0.95] tracking-[-0.03em]">
-              How the{" "}
+            <Eyebrow>What we&apos;re up against</Eyebrow>
+            <h2 className="mt-4 font-display text-[clamp(40px,5.4vw,84px)] font-bold leading-[0.95] tracking-[-0.03em]">
+              The admin{" "}
               <em className="font-serif font-normal italic text-accent">
-                agents
+                never stops
               </em>
-              <br />
-              work together.
+              .
             </h2>
           </div>
-          <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted">
-            5 agents · 1 reviewer per agent
-          </span>
+          <p className="max-w-[36ch] text-[15px] leading-[1.55] text-foreground/80 md:text-right">
+            Five problems that used to eat volunteers&apos; evenings.
+            <br />
+            <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-accent">
+              → Hover or tap a card — meet the agent.
+            </span>
+          </p>
         </div>
       </Reveal>
 
-      <div className="grid gap-5 md:grid-cols-2 md:gap-6">
-        {AGENTS.map((a, i) => (
-          <Reveal key={a.name} delay={i * 0.05}>
-            <div className="flex h-full flex-col gap-4 border border-foreground bg-background p-6 md:p-8">
-              <div className="flex items-start justify-between gap-3">
-                <h3 className="m-0 font-display text-[26px] font-semibold leading-tight tracking-[-0.02em]">
-                  {a.name}
-                </h3>
-                <NovaStar size={18} fill="var(--color-accent)" />
-              </div>
-              <p className="m-0 text-[15px] leading-[1.55] text-foreground/85">
-                {a.role}
-              </p>
-              <dl className="mt-2 grid gap-2 border-t border-border pt-4 text-[13px] leading-[1.5]">
-                <div className="grid grid-cols-[64px_1fr] gap-2">
-                  <dt className="font-mono text-[10px] uppercase tracking-[0.1em] text-muted">
-                    Reads
-                  </dt>
-                  <dd className="m-0 text-foreground/80">{a.reads}</dd>
-                </div>
-                <div className="grid grid-cols-[64px_1fr] gap-2">
-                  <dt className="font-mono text-[10px] uppercase tracking-[0.1em] text-accent">
-                    Writes
-                  </dt>
-                  <dd className="m-0 text-foreground/80">{a.writes}</dd>
-                </div>
-              </dl>
-            </div>
-          </Reveal>
-        ))}
-      </div>
+      <WorkflowFlipList workflows={WORKFLOWS} />
     </section>
   );
 }
@@ -369,8 +270,8 @@ function NeverDelegate() {
   );
 }
 
-/* ─── HOW IT RUNS ─── */
-function HowItRuns() {
+/* ─── WHY THIS WAY ─── */
+function WhyThisWay() {
   return (
     <section
       className={`border-t border-border ${PAD_X}`}
@@ -379,41 +280,92 @@ function HowItRuns() {
         paddingBottom: "clamp(80px, 9vw, 160px)",
       }}
     >
-      <Reveal>
-        <div className="mb-10 max-w-[60ch]">
-          <Eyebrow>A typical week</Eyebrow>
-          <h2 className="mt-4 font-display text-[clamp(32px,4vw,56px)] font-bold leading-none tracking-[-0.03em]">
-            What it{" "}
-            <em className="font-serif font-normal italic text-accent">
-              actually
-            </em>{" "}
-            looks like.
-          </h2>
-          <p className="mt-4 text-[15px] leading-[1.6] text-foreground/80">
-            Agents propose, humans approve. The org runs on a steady drumbeat of
-            drafts followed by 10-minute reviews — instead of evenings spent
-            doing the drafting from scratch.
-          </p>
-        </div>
-      </Reveal>
+      <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
+        <Reveal>
+          <div className="lg:sticky lg:top-28">
+            <Eyebrow>The reason</Eyebrow>
+            <h2 className="mt-4 font-display text-[clamp(36px,4.8vw,72px)] font-bold leading-[0.95] tracking-[-0.03em]">
+              Why we built it{" "}
+              <em className="font-serif font-normal italic text-accent">
+                this way
+              </em>
+              .
+            </h2>
+            <p className="mt-5 max-w-[34ch] font-mono text-[12px] uppercase leading-[1.7] tracking-[0.06em] text-muted">
+              ↳ The argument for letting agents in — and the line we won&apos;t
+              cross.
+            </p>
+          </div>
+        </Reveal>
 
-      <ul className="m-0 list-none border-t border-foreground p-0">
-        {WEEK.map((d, i) => (
-          <Reveal as="li" key={d.when} delay={i * 0.04}>
-            <div className="grid grid-cols-[70px_1fr] items-start gap-5 border-b border-border py-6 md:grid-cols-[80px_220px_1fr] md:items-center md:gap-8 md:py-7">
-              <div className="font-display text-[28px] font-bold leading-none tracking-[-0.02em]">
-                {d.when}
-              </div>
-              <div className="font-mono text-[11px] uppercase tracking-[0.1em] text-accent">
-                {d.who}
-              </div>
-              <p className="col-span-2 m-0 text-[15px] leading-[1.55] text-foreground/85 md:col-span-1">
-                {d.body}
-              </p>
-            </div>
-          </Reveal>
-        ))}
-      </ul>
+        <Reveal delay={0.08}>
+          <div className="space-y-6 text-[17px] leading-[1.7] text-foreground/85 md:text-[18px]">
+            <p className="m-0">
+              Non-profits live in a bind. The mission demands a small-company
+              workload — accounting, comms, partnerships, member ops — but the
+              budget is zero, the staff is volunteer, and the cost of asking
+              someone to spend their evening formatting expense reports is{" "}
+              <em className="font-serif italic text-accent">
+                real human burnout
+              </em>
+              .
+            </p>
+
+            <p className="m-0">
+              The traditional answer is to do less. Run fewer events. Reply
+              slower. Skip the partner outreach. Let the newsletter slip. We
+              have watched good communities die this way — not from a lack of
+              passion, but from the quiet attrition of people who joined to
+              build things and ended up doing inbox triage for a year.
+            </p>
+
+            <p className="m-0">
+              We think there is a third option now. Most of the admin load —
+              the part that is repetitive, structured, and rule-following — can
+              be drafted by an agent. The judgment, the relationships, the
+              actual decisions stay with members. The same volunteer who used
+              to spend three hours on reimbursements now spends fifteen minutes
+              reviewing an agent&apos;s draft, and{" "}
+              <em className="font-serif italic text-accent">
+                gets the other two hours back
+              </em>{" "}
+              — to talk to a new member, ship a project, or just rest.
+            </p>
+
+            <figure
+              className="m-0 border-l-2 border-accent pl-6 py-2"
+              style={{ background: "transparent" }}
+            >
+              <blockquote className="m-0 font-serif text-[clamp(22px,2.4vw,30px)] italic leading-[1.35] text-foreground">
+                The agents are interns who never sleep and never get bored.
+                We&apos;re the ones who decide what they&apos;re allowed to
+                ship.
+              </blockquote>
+            </figure>
+
+            <p className="m-0">
+              This isn&apos;t about pretending humans aren&apos;t there. Every
+              agent output crosses a human checkpoint before it leaves the
+              building. The drafts are cheap; the review is the work. If an
+              agent draft would embarrass us in front of a member, it
+              doesn&apos;t go out — and the next prompt gets tightened.
+            </p>
+
+            <p className="m-0">
+              What we are trying to find out is exactly where the line goes.
+              There is a healthy version of this where the org runs leaner,
+              members spend more time on what they came for, and nobody loses
+              the connection to how decisions get made. There is also a bad
+              version where automation makes the relationship thinner and the
+              community becomes a brand instead of a place.{" "}
+              <em className="font-serif italic text-accent">
+                We are betting we can find the first one.
+              </em>{" "}
+              This page is the public record of how we are trying.
+            </p>
+          </div>
+        </Reveal>
+      </div>
     </section>
   );
 }
