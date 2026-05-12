@@ -35,7 +35,7 @@ export function Header() {
           NOVAWERK
         </span>
         <span className="ml-1 hidden font-mono text-[11px] uppercase tracking-[0.08em] text-muted md:inline">
-          ⌐ AI-Native Non-Profit Community · Est. 2025
+          ⌐ Community · Est. 2025
         </span>
       </Link>
 
