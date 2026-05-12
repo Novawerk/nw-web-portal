@@ -361,7 +361,7 @@ export default async function PortfolioDetailPage({
           </p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link
-              href="/community"
+              href="#join"
               className="inline-flex items-center gap-2.5 rounded-full bg-accent px-[22px] py-3.5 font-mono text-[13px] uppercase tracking-[0.04em] text-background transition-transform hover:-translate-x-0.5 hover:-translate-y-0.5 hover:bg-foreground"
             >
               Talk to {item.title} →

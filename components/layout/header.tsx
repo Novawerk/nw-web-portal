@@ -10,7 +10,7 @@ const tabs = [
   { href: "/", label: "Home", num: "01" },
   { href: "/portfolio", label: "Portfolio", num: "02" },
   { href: "/blog", label: "Blog", num: "03" },
-  { href: "/community", label: "Join Us", num: "04" },
+  { href: "/community", label: "AI-Native Community", num: "04" },
 ];
 
 function isActive(pathname: string, href: string): boolean {
@@ -62,10 +62,10 @@ export function Header() {
       </nav>
 
       <Link
-        href="/community"
+        href="#join"
         className="inline-flex items-center gap-2 rounded-full border border-foreground bg-foreground px-4 py-2.5 font-mono text-[12px] uppercase tracking-[0.06em] text-background transition-colors hover:border-accent hover:bg-accent"
       >
-        Pitch an idea
+        Join us
         <ArrowRight className="size-3.5" />
       </Link>
     </header>

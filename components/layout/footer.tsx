@@ -4,20 +4,20 @@ const sitemap = [
   { href: "/", label: "Home" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/blog", label: "Blog" },
-  { href: "/community", label: "Join Us" },
+  { href: "/community", label: "AI-Native Community" },
 ];
 
 const community = [
   { label: "Discord", href: "#" },
   { label: "GitHub", href: "https://github.com" },
   { label: "Xiaohongshu", href: "#" },
-  { label: "Newsletter", href: "/community#newsletter" },
+  { label: "Newsletter", href: "#join" },
 ];
 
 const contact = [
   { label: "info@novawerk.io", href: "mailto:info@novawerk.io" },
-  { label: "Volunteer with us", href: "/community" },
-  { label: "Partners / sponsors", href: "/community" },
+  { label: "Volunteer with us", href: "#join" },
+  { label: "Partners / sponsors", href: "#join" },
   { label: "Press inquiries", href: "mailto:info@novawerk.io" },
 ];
 
