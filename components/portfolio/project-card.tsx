@@ -45,7 +45,7 @@ export function ProjectCard({
             className="object-cover"
           />
         ) : (
-          <NovaStar size={56} fill="rgba(255,255,255,0.22)" />
+          <NovaStar size={56} fill="rgba(255,255,255,0.22)" noCore />
         )}
         <span className="absolute left-3 top-3 font-mono text-[10px] uppercase tracking-[0.1em] text-white/70 mix-blend-luminosity">
           {assetId(index)}
@@ -65,7 +65,7 @@ export function ProjectCard({
             {project.tagline}
           </p>
         )}
-        <div className="mt-2 flex justify-between font-mono text-[10px] uppercase tracking-[0.08em] text-muted">
+        <div className="mt-2 flex justify-between font-mono text-[10px] uppercase tracking-[0.08em] text-mute">
           <span>{category}</span>
           <span>{lead}</span>
         </div>

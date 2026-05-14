@@ -251,8 +251,8 @@ function SheetHeader({ onClose }: { onClose: () => void }) {
     <div className="sticky top-0 z-10 flex items-center justify-between border-b border-border bg-background/95 px-5 py-3 backdrop-blur md:px-8 md:py-4">
       <div className="flex items-center gap-3">
         <span className="hidden h-1 w-10 rounded-full bg-foreground/20 md:inline-block" />
-        <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.1em] text-muted">
-          <NovaStar size={14} fill="var(--color-accent)" />
+        <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.1em] text-mute">
+          <NovaStar size={14} fill="var(--color-accent)" noCore />
           Join Novawerk
         </span>
       </div>
@@ -313,7 +313,7 @@ function HeroSection({ titleId }: { titleId: string }) {
           style={{ background: "var(--color-paper)" }}
         >
           <span
-            className="absolute left-4 -top-[10px] px-2 font-mono text-[10px] uppercase tracking-[0.1em] text-muted"
+            className="absolute left-4 -top-[10px] px-2 font-mono text-[10px] uppercase tracking-[0.1em] text-mute"
             style={{ background: "var(--color-background)" }}
           >
             ↳ Pledge
@@ -360,7 +360,7 @@ function RolesSection() {
                 {r.num}
               </div>
               <div className="col-span-1">
-                <div className="font-mono text-[10px] uppercase tracking-[0.1em] text-muted">
+                <div className="font-mono text-[10px] uppercase tracking-[0.1em] text-mute">
                   {r.tier}
                 </div>
                 <div className="mt-1.5 font-display text-2xl font-semibold tracking-[-0.02em]">
@@ -410,7 +410,7 @@ function FormSection() {
 function Closer() {
   return (
     <div className="px-6 py-10 text-center md:px-12 md:py-14">
-      <p className="mx-auto max-w-[40ch] font-mono text-[11px] uppercase tracking-[0.08em] text-muted">
+      <p className="mx-auto max-w-[40ch] font-mono text-[11px] uppercase tracking-[0.08em] text-mute">
         Not ready? Just lurk on the newsletter — we&apos;ll knock on the door
         again next month.
       </p>

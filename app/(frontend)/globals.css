@@ -1,17 +1,19 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* Font families are injected by next/font in app/(frontend)/layout.tsx as
-   CSS variables on <html>: --font-display, --font-serif, --font-sans,
-   --font-mono. We re-expose them through Tailwind's @theme so utilities
-   like `font-display`, `font-serif`, `font-mono`, `font-sans` work. */
+/* Font families: --font-serif/sans/mono are injected by next/font in
+   app/(frontend)/layout.tsx as CSS variables on <html>. --font-display is
+   Cabinet Grotesk loaded from Fontshare via a <link> tag in layout.tsx
+   (KB-canonical display family). We expose all four through Tailwind's
+   @theme so utilities like `font-display`, `font-serif`, `font-mono`,
+   `font-sans` work. */
 @theme {
   --color-background: #efe9d8;
   --color-background-2: #e6dfcc;
   --color-foreground: #0f0f0f;
   --color-foreground-soft: #2a2a2a;
-  --color-muted: #8a816f;
-  --color-muted-foreground: #8a8275;
+  --color-mute: #7a7468;
+  --color-mute-foreground: #8a8275;
   --color-border: rgba(15, 15, 15, 0.14);
   --color-border-strong: rgba(15, 15, 15, 0.6);
   --color-surface: #e6dfcc;
@@ -19,12 +21,13 @@
   --color-card: #ffffff;
   --color-accent: #1f7a4a;
   --color-accent-deep: #155a36;
+  --color-accent-core: #0a3920;
   --color-accent-foreground: #efe9d8;
-  --color-blue: #1e3a8a;
+  --color-blue: #2a5dc8;
   --color-yellow: #f2c84b;
 
   --font-sans: var(--nw-font-sans), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-display: var(--nw-font-display), system-ui, -apple-system, sans-serif;
+  --font-display: "Cabinet Grotesk", "Inter Tight", system-ui, -apple-system, sans-serif;
   --font-serif: var(--nw-font-serif), Georgia, serif;
   --font-mono: var(--nw-font-mono), ui-monospace, Menlo, monospace;
 }
@@ -191,7 +194,7 @@ body::before {
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-muted);
+  color: var(--color-mute);
 }
 .nw-facts-grid strong {
   font-family: var(--font-display);
@@ -236,7 +239,7 @@ body::before {
   font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-muted);
+  color: var(--color-mute);
   margin-bottom: 12px;
   display: inline-flex;
   gap: 10px;
@@ -261,7 +264,7 @@ body::before {
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-muted);
+  color: var(--color-mute);
   margin-bottom: 4px;
 }
 .nw-toc__share-btn {
@@ -332,7 +335,7 @@ body::before {
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-muted);
+  color: var(--color-mute);
 }
 
 .nw-roles-grid {
@@ -447,7 +450,7 @@ body::before {
   font-size: 11px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--color-muted);
+  color: var(--color-mute);
   font-weight: 500;
 }
 
@@ -491,7 +494,7 @@ body::before {
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-muted);
+  color: var(--color-mute);
   font-weight: 500;
   border-bottom: 1px solid var(--color-foreground);
 }

@@ -13,9 +13,9 @@ import {
 import { cn } from "@/lib/utils";
 
 const fieldClass =
-  "w-full border-b border-foreground bg-transparent py-2.5 font-display text-xl font-medium tracking-[-0.01em] text-foreground placeholder:font-sans placeholder:text-base placeholder:font-normal placeholder:text-muted/60 focus:border-accent focus:outline-none transition-colors";
+  "w-full border-b border-foreground bg-transparent py-2.5 font-display text-xl font-medium tracking-[-0.01em] text-foreground placeholder:font-sans placeholder:text-base placeholder:font-normal placeholder:text-mute/60 focus:border-accent focus:outline-none transition-colors";
 const labelClass =
-  "flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.08em] text-muted";
+  "flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.08em] text-mute";
 const stepClass = "text-accent";
 const errorClass = "mt-2 font-mono text-[11px] text-accent";
 
@@ -211,7 +211,7 @@ export function ContactForm() {
           </div>
 
           <div className="flex flex-wrap items-center justify-between gap-5 border-t border-foreground pt-5">
-            <p className="max-w-[50ch] font-mono text-[11px] leading-[1.6] tracking-[0.04em] text-muted">
+            <p className="max-w-[50ch] font-mono text-[11px] leading-[1.6] tracking-[0.04em] text-mute">
               Submitting means you back the pledge. We don&apos;t share your
               info with third parties — email us anytime to remove it.
             </p>

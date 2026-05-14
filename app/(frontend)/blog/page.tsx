@@ -135,7 +135,7 @@ function FeaturedPost({ post }: { post: BlogPost }) {
               {post.excerpt}
             </p>
           )}
-          <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted">
+          <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-mute">
             {post.author ?? "Novawerk"} · {readTime(post.content)} min read
           </div>
           <div className="mt-2">

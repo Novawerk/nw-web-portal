@@ -29,7 +29,7 @@ const MAPPING: Record<
   archived: {
     label: "Archived",
     designKey: "paused",
-    classes: "bg-surface text-muted",
+    classes: "bg-surface text-mute",
   },
 };
 

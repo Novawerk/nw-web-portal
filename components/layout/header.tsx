@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight } from "lucide-react";
-import { NovaStar } from "@/components/icons/nova-star";
 import { cn } from "@/lib/utils";
 
 const tabs = [
@@ -30,11 +29,16 @@ export function Header() {
       }}
     >
       <Link href="/" className="flex items-center gap-3">
-        <NovaStar size={22} fill="var(--color-accent)" spin />
-        <span className="font-display text-[19px] font-bold tracking-[-0.01em]">
-          NOVAWERK
-        </span>
-        <span className="ml-1 hidden font-mono text-[11px] uppercase tracking-[0.08em] text-muted md:inline">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/brand/nova-star-horizontal.svg"
+          alt="Novawerk"
+          width={120}
+          height={31}
+          className="h-7 w-auto select-none"
+          draggable={false}
+        />
+        <span className="ml-1 hidden font-mono text-[11px] uppercase tracking-[0.08em] text-mute md:inline">
           ⌐ Community · Est. 2025
         </span>
       </Link>

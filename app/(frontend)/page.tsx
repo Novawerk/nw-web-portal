@@ -49,18 +49,21 @@ const principles = [
     title: "Purposeful Innovation",
     body: "Innovation should bring real, positive change — not chase trends or quick wins. The question we care about: when this thing exists, is the world a little better?",
     color: "var(--color-accent)",
+    core: "var(--color-accent-core)",
   },
   {
     tag: "Principle 02",
     title: "Build, Learn, Together",
     body: "An open community where people from any background learn by building real things. Skills are a side-effect of the project. So are friendships.",
     color: "var(--color-blue)",
+    core: "var(--color-foreground)",
   },
   {
     tag: "Principle 03",
     title: "Responsibility for Change",
     body: "We share the responsibility of making the world a little better. Indifference is the only failure. You don't need to be ready — you just need to start.",
     color: "var(--color-foreground)",
+    core: "var(--color-background)",
   },
 ];
 
@@ -183,7 +186,7 @@ function Hero() {
 
       <div className="mb-8 flex flex-col items-start justify-between gap-3 md:mb-12 md:flex-row md:items-center">
         <Eyebrow>A non-profit community · est. 2025</Eyebrow>
-        <div className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted">
+        <div className="font-mono text-[11px] uppercase tracking-[0.08em] text-mute">
           [N°001] · Spring 2025
         </div>
       </div>
@@ -219,7 +222,7 @@ function Hero() {
           <div className="font-display font-bold leading-[0.85] tracking-[-0.04em] text-foreground text-[clamp(96px,12vw,176px)]">
             N<span className="text-accent">+1</span>
           </div>
-          <p className="max-w-[22ch] font-mono text-[11px] uppercase tracking-[0.08em] leading-[1.55] text-muted">
+          <p className="max-w-[22ch] font-mono text-[11px] uppercase tracking-[0.08em] leading-[1.55] text-mute">
             <span className="text-foreground/90">n.</span> the next one to
             step in.
             <br />
@@ -228,7 +231,7 @@ function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-6 right-7 hidden flex-col items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-muted md:flex md:right-12 lg:right-20">
+      <div className="absolute bottom-6 right-7 hidden flex-col items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-mute md:flex md:right-12 lg:right-20">
         <span>Scroll</span>
         <ArrowDown className="size-3 animate-bounce-soft" />
       </div>
@@ -318,8 +321,8 @@ function Principles() {
                 className={`grid items-start gap-10 py-10 lg:grid-cols-[160px_110px_minmax(0,1fr)] lg:py-14 ${PAD_X}`}
               >
                 <div className="flex flex-col gap-3.5 pt-2">
-                  <NovaStar size={28} fill={p.color} />
-                  <div className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted">
+                  <NovaStar size={28} fill={p.color} coreFill={p.core} />
+                  <div className="font-mono text-[11px] uppercase tracking-[0.1em] text-mute">
                     {p.tag}
                   </div>
                 </div>
@@ -398,7 +401,7 @@ function Projects({ featured }: { featured: FeaturedProject[] }) {
                 <span className="absolute left-3.5 top-3.5 rounded-sm bg-black/20 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.1em] text-white/70">
                   {p.asset}
                 </span>
-                <NovaStar size={48} fill="rgba(255,255,255,0.18)" />
+                <NovaStar size={48} fill="rgba(255,255,255,0.18)" noCore />
                 {(p.tag || p.year) && (
                   <div className="absolute inset-x-3.5 bottom-3.5 flex justify-between font-mono text-[10px] uppercase tracking-[0.1em] text-white/85">
                     <span>{p.tag}</span>
@@ -413,7 +416,7 @@ function Projects({ featured }: { featured: FeaturedProject[] }) {
                 <p className="mt-2 text-sm leading-[1.6] text-foreground/85">
                   {p.description}
                 </p>
-                <div className="mt-3 flex justify-between border-t border-border pt-3 font-mono text-[11px] uppercase tracking-[0.06em] text-muted">
+                <div className="mt-3 flex justify-between border-t border-border pt-3 font-mono text-[11px] uppercase tracking-[0.06em] text-mute">
                   <span>{p.stat || "—"}</span>
                   <span className="link-underline">Case →</span>
                 </div>
@@ -516,7 +519,7 @@ function Manifesto() {
                 that &ldquo;off&rdquo;
               </em>{" "}
               might just be the start of your next project.
-              <span className="mt-7 block font-mono text-xs uppercase tracking-[0.1em] text-muted">
+              <span className="mt-7 block font-mono text-xs uppercase tracking-[0.1em] text-mute">
                 — Novawerk Community
               </span>
             </p>
@@ -567,7 +570,7 @@ function BlogTeaser({
               href={`/blog/${p.slug}`}
               className="group grid grid-cols-[110px_1fr] items-center gap-4 border-b border-border px-1 py-6 text-base transition-[padding,color] duration-300 hover:pl-4 hover:text-accent md:grid-cols-[130px_130px_1fr_110px] md:gap-5"
             >
-              <span className="font-mono text-[11px] tracking-[0.08em] text-muted">
+              <span className="font-mono text-[11px] tracking-[0.08em] text-mute">
                 {p.date}
               </span>
               <span className="hidden font-mono text-[11px] uppercase tracking-[0.08em] text-accent md:block">
@@ -576,7 +579,7 @@ function BlogTeaser({
               <span className="font-display text-[clamp(18px,1.6vw,24px)] font-semibold leading-[1.2] tracking-[-0.02em]">
                 {p.title}
               </span>
-              <span className="hidden text-right font-mono text-[11px] uppercase tracking-[0.06em] text-muted md:inline">
+              <span className="hidden text-right font-mono text-[11px] uppercase tracking-[0.06em] text-mute md:inline">
                 {p.read} <span className="ml-4">→</span>
               </span>
             </Link>
@@ -618,7 +621,7 @@ function HowToJoin() {
                 {p.num}
               </div>
               <div
-                className="font-mono text-[11px] uppercase tracking-[0.1em] text-muted"
+                className="font-mono text-[11px] uppercase tracking-[0.1em] text-mute"
                 style={{ marginBottom: "-4px" }}
               >
                 {p.en}

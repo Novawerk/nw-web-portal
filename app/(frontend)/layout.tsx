@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import {
-  Bricolage_Grotesque,
   Instrument_Serif,
   Space_Grotesk,
   JetBrains_Mono,
@@ -11,13 +10,6 @@ import { Footer } from "@/components/layout/footer";
 import { SmoothScroll } from "@/components/providers/smooth-scroll";
 import { CursorFollower } from "@/components/motion/cursor-follower";
 import { JoinSheet } from "@/components/join/join-sheet";
-
-const display = Bricolage_Grotesque({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--nw-font-display",
-  display: "swap",
-});
 
 const serif = Instrument_Serif({
   subsets: ["latin"],
@@ -53,8 +45,16 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`antialiased ${display.variable} ${serif.variable} ${sans.variable} ${mono.variable}`}
+      className={`antialiased ${serif.variable} ${sans.variable} ${mono.variable}`}
     >
+      <head>
+        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800&display=swap"
+        />
+      </head>
       <body className="min-h-dvh flex flex-col bg-background text-foreground font-sans">
         <CursorFollower />
         <SmoothScroll>

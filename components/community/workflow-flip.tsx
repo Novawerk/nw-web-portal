@@ -59,10 +59,10 @@ const VARIANT_STYLES: Record<
   paper: {
     bg: "bg-paper",
     text: "text-foreground",
-    mono: "text-muted",
+    mono: "text-mute",
     starFill: "var(--color-accent)",
     border: "border-foreground",
-    revealHint: "text-muted",
+    revealHint: "text-mute",
   },
   accent: {
     bg: "bg-accent",
@@ -136,6 +136,7 @@ function WorkflowCard({
             <NovaStar
               size={16}
               fill={s.starFill}
+              noCore
               className={cn(
                 "transition-transform duration-700 group-hover:rotate-90",
                 isRevealed && "rotate-90",
@@ -200,7 +201,7 @@ function WorkflowCard({
 
           <dl className="mt-auto grid gap-2 border-t border-border pt-3 text-[12.5px] leading-[1.5]">
             <div className="grid grid-cols-[58px_1fr] gap-3">
-              <dt className="font-mono text-[10px] uppercase tracking-[0.1em] text-muted">
+              <dt className="font-mono text-[10px] uppercase tracking-[0.1em] text-mute">
                 Reads
               </dt>
               <dd className="m-0 text-foreground/85">{workflow.reads}</dd>
@@ -213,7 +214,7 @@ function WorkflowCard({
             </div>
           </dl>
 
-          <div className="mt-1 flex items-center justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.12em] text-muted">
+          <div className="mt-1 flex items-center justify-between gap-3 font-mono text-[10px] uppercase tracking-[0.12em] text-mute">
             <span className="inline-flex items-center gap-2">
               <span aria-hidden className="inline-block size-1.5 rounded-full bg-accent" />
               human reviews every output
