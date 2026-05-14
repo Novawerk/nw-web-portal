@@ -96,7 +96,7 @@ export default async function BlogPostPage({
         >
           ← All posts
         </Link>
-        <span className="uppercase tracking-[0.08em] text-muted">
+        <span className="uppercase tracking-[0.08em] text-mute">
           Blog / {category}
         </span>
       </div>
@@ -115,7 +115,7 @@ export default async function BlogPostPage({
             <span className="font-mono text-[11px] uppercase tracking-[0.08em] text-accent">
               {category}
             </span>
-            <span className="font-mono text-[12px] uppercase tracking-[0.06em] text-muted">
+            <span className="font-mono text-[12px] uppercase tracking-[0.06em] text-mute">
               {formatDate(post.date)} · {read} min read
             </span>
           </div>
@@ -135,13 +135,13 @@ export default async function BlogPostPage({
         <Reveal delay={0.2}>
           <div className="mt-2 flex items-center gap-3.5">
             <div className="flex size-11 items-center justify-center rounded-full bg-foreground">
-              <NovaStar size={20} fill="var(--color-background)" />
+              <NovaStar size={20} fill="var(--color-background)" coreFill="var(--color-foreground)" />
             </div>
             <div>
               <div className="font-display text-base font-semibold tracking-[-0.01em]">
                 {post.author ?? "Novawerk"}
               </div>
-              <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-muted">
+              <div className="font-mono text-[11px] uppercase tracking-[0.06em] text-mute">
                 Contributor · Novawerk
               </div>
             </div>
@@ -250,7 +250,7 @@ export default async function BlogPostPage({
                   href={`/blog/${r.slug}`}
                   className="flex flex-col gap-3 border-t border-foreground pt-4 transition-colors hover:text-accent"
                 >
-                  <div className="flex justify-between font-mono text-[11px] uppercase tracking-[0.06em] text-muted">
+                  <div className="flex justify-between font-mono text-[11px] uppercase tracking-[0.06em] text-mute">
                     <span className="text-accent">{r.tags?.[0] ?? "Note"}</span>
                     <span>{formatDate(r.date)}</span>
                   </div>
@@ -262,7 +262,7 @@ export default async function BlogPostPage({
                       {r.excerpt}
                     </p>
                   )}
-                  <div className="mt-auto pt-2 font-mono text-[11px] uppercase tracking-[0.04em] text-muted">
+                  <div className="mt-auto pt-2 font-mono text-[11px] uppercase tracking-[0.04em] text-mute">
                     {r.author ?? "Novawerk"} · {readTime(r.content)} min
                   </div>
                 </Link>

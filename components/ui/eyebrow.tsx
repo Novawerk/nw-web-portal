@@ -17,7 +17,7 @@ export function Eyebrow({
     <div
       className={cn(
         "inline-flex items-center gap-2.5 font-mono text-[12px] uppercase tracking-[0.08em]",
-        tone === "dark" ? "text-background/60" : "text-muted",
+        tone === "dark" ? "text-background/60" : "text-mute",
         className,
       )}
     >

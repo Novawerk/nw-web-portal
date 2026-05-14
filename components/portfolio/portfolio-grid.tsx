@@ -96,7 +96,7 @@ export function PortfolioGrid({ projects }: Props) {
             );
           })}
         </div>
-        <div className="flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.06em] text-muted">
+        <div className="flex items-center gap-1 font-mono text-[11px] uppercase tracking-[0.06em] text-mute">
           <span className="mr-1">View ·</span>
           <button
             type="button"
@@ -143,7 +143,7 @@ export function PortfolioGrid({ projects }: Props) {
                 <h2 className="m-0 font-display text-[clamp(28px,3vw,44px)] font-bold tracking-[-0.02em]">
                   {statusLabel(status)}
                 </h2>
-                <div className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted">
+                <div className="font-mono text-[11px] uppercase tracking-[0.08em] text-mute">
                   [{String(group.length).padStart(2, "0")}]
                 </div>
               </div>
@@ -199,7 +199,7 @@ export function PortfolioGrid({ projects }: Props) {
                           {project.title}
                         </div>
                         {project.tagline && (
-                          <div className="mt-1 text-muted">
+                          <div className="mt-1 text-mute">
                             {project.tagline}
                           </div>
                         )}

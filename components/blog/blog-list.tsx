@@ -86,7 +86,7 @@ export function BlogList({ posts }: BlogListProps) {
       >
         {filtered.map((p) => (
           <article key={p.slug} className="flex flex-col gap-3 border-t border-foreground pt-4">
-            <div className="flex justify-between font-mono text-[11px] uppercase tracking-[0.06em] text-muted">
+            <div className="flex justify-between font-mono text-[11px] uppercase tracking-[0.06em] text-mute">
               <span className="text-accent">{p.tags?.[0] ?? "Note"}</span>
               <span>{formatDate(p.date)}</span>
             </div>
@@ -104,13 +104,13 @@ export function BlogList({ posts }: BlogListProps) {
                 {p.excerpt}
               </p>
             )}
-            <div className="mt-auto pt-2 font-mono text-[11px] uppercase tracking-[0.04em] text-muted">
+            <div className="mt-auto pt-2 font-mono text-[11px] uppercase tracking-[0.04em] text-mute">
               {p.author ?? "Novawerk"} · {readTime(p.content)} min
             </div>
           </article>
         ))}
         {filtered.length === 0 && (
-          <p className="font-mono text-[12px] uppercase tracking-[0.08em] text-muted">
+          <p className="font-mono text-[12px] uppercase tracking-[0.08em] text-mute">
             No posts in this category yet.
           </p>
         )}

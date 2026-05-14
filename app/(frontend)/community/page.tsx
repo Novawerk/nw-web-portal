@@ -158,7 +158,7 @@ function Hero() {
             style={{ background: "var(--color-paper)" }}
           >
             <span
-              className="absolute left-4 -top-[10px] px-2 font-mono text-[10px] uppercase tracking-[0.1em] text-muted"
+              className="absolute left-4 -top-[10px] px-2 font-mono text-[10px] uppercase tracking-[0.1em] text-mute"
               style={{ background: "var(--color-background)" }}
             >
               ↳ Principle
@@ -291,7 +291,7 @@ function WhyThisWay() {
               </em>
               .
             </h2>
-            <p className="mt-5 max-w-[34ch] font-mono text-[12px] uppercase leading-[1.7] tracking-[0.06em] text-muted">
+            <p className="mt-5 max-w-[34ch] font-mono text-[12px] uppercase leading-[1.7] tracking-[0.06em] text-mute">
               ↳ The argument for letting agents in — and the line we won&apos;t
               cross.
             </p>

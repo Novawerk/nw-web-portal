@@ -24,6 +24,15 @@ const contact = [
 export function Footer() {
   return (
     <footer className="mt-16 bg-foreground px-6 pb-7 pt-20 text-background md:px-10 md:pt-24 lg:px-20">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/brand/nova-star-horizontal-dark.svg"
+        alt="Novawerk"
+        width={120}
+        height={31}
+        className="mb-14 h-7 w-auto select-none"
+        draggable={false}
+      />
       <div className="grid grid-cols-1 gap-10 border-b border-background/15 pb-14 md:grid-cols-[2fr_1fr_1fr_1fr]">
         <div>
           <p className="font-display text-5xl font-bold leading-[0.95] tracking-[-0.04em] md:text-7xl lg:text-[96px]">

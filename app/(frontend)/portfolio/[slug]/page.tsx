@@ -154,7 +154,7 @@ export default async function PortfolioDetailPage({
         <Link href="/portfolio" className="link-underline">
           ← All projects
         </Link>
-        <span className="uppercase tracking-[0.08em] text-muted">
+        <span className="uppercase tracking-[0.08em] text-mute">
           Portfolio / {assetId}
         </span>
       </div>
@@ -210,7 +210,7 @@ export default async function PortfolioDetailPage({
                 priority
               />
             ) : (
-              <NovaStar size={180} fill="rgba(255,255,255,0.22)" />
+              <NovaStar size={180} fill="rgba(255,255,255,0.22)" noCore />
             )}
             <span className="absolute left-5 top-5 font-mono text-[11px] uppercase tracking-[0.1em] text-white/70">
               ▸ {assetId} · cover
@@ -343,7 +343,7 @@ export default async function PortfolioDetailPage({
                       />
                     </div>
                     {g.caption && (
-                      <figcaption className="border-t border-border bg-background p-3 text-sm text-muted">
+                      <figcaption className="border-t border-border bg-background p-3 text-sm text-mute">
                         {g.caption}
                       </figcaption>
                     )}
@@ -424,13 +424,13 @@ export default async function PortfolioDetailPage({
                           className="object-cover"
                         />
                       ) : (
-                        <NovaStar size={42} fill="rgba(255,255,255,0.22)" />
+                        <NovaStar size={42} fill="rgba(255,255,255,0.22)" noCore />
                       )}
                       <span className="absolute left-3 top-3 font-mono text-[10px] uppercase tracking-[0.1em] text-white/70">
                         {assetIdFor(rIndex >= 0 ? rIndex : i + 1)}
                       </span>
                     </div>
-                    <div className="font-mono text-[10px] uppercase tracking-[0.1em] text-muted">
+                    <div className="font-mono text-[10px] uppercase tracking-[0.1em] text-mute">
                       {deriveCategory(r.tag)} · {deriveYear(r.tag)}
                     </div>
                     <h3 className="m-0 font-display text-[18px] font-semibold tracking-[-0.01em]">
