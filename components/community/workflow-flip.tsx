@@ -23,13 +23,13 @@ export function WorkflowFlipList({ workflows }: { workflows: Workflow[] }) {
   const [revealed, setRevealed] = useState<Record<number, boolean>>({});
 
   return (
-    <ul className="m-0 grid list-none gap-3 p-0 md:grid-cols-6 md:gap-4">
+    <ul className="m-0 grid list-none grid-cols-1 gap-3 p-0 md:grid-cols-6 md:gap-4">
       {workflows.map((w, i) => (
         <Reveal
           as="li"
           key={w.tag}
           delay={i * 0.05}
-          className={cn("block", w.span ?? "md:col-span-2")}
+          className={cn("block min-w-0", w.span ?? "md:col-span-2")}
         >
           <WorkflowCard
             workflow={w}
