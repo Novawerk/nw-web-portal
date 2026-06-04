@@ -9,7 +9,7 @@ const sitemap = [
 
 const community = [
   { label: "Discord", href: "#" },
-  { label: "GitHub", href: "https://github.com" },
+  { label: "GitHub", href: "https://github.com/Novawerk" },
   { label: "Xiaohongshu", href: "#" },
   { label: "Newsletter", href: "#join" },
 ];
