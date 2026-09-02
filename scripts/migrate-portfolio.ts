@@ -189,7 +189,7 @@ const SEEDS = [
     description:
       "A small tool, designed without profit as a constraint — to see whether the experience can become good again.",
     body: YIMA_BODY,
-    status: "launching" as const,
+    status: "launched" as const,
     link: "https://novawerk.github.io/YIMA/",
     featured: true,
     order: 20,

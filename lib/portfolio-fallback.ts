@@ -25,7 +25,7 @@ export const fallbackPortfolioItems: PortfolioItem[] = [
     tagline: "Privacy-first period calendar.",
     description:
       "A small tool, designed without profit as a constraint — to see whether the experience can become good again.",
-    status: "launching",
+    status: "launched",
     link: "https://novawerk.github.io/YIMA/",
     members: [],
     gallery: [],
