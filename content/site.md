@@ -157,6 +157,12 @@ Sections (numbered):
 
 ### `/community`
 
+> **Stale.** The shipped page is now *AI-Native Community* — which agents run
+> the back office, and what stays human. The copy below describes the earlier
+> involvement/contact page; the contact form moved into the `#join` sheet
+> documented next. Re-derive this section from
+> `app/(frontend)/community/page.tsx` next time it's touched.
+
 **Hero** — Eyebrow `Community` · H1 Build with *us*.
 
 > Novawerk is open. If you have a meaningful idea, want to learn by building, or want to contribute to projects that matter — there's a place for you here.
@@ -182,6 +188,55 @@ Sections (numbered):
 - Eyebrow `Newsletter`
 - H2 Stay close to what we're *making*.
 - NewsletterForm (see §5)
+
+### `#join` — Join sheet (global)
+
+Not a route: a bottom-sheet modal mounted in the frontend layout
+(`components/join/join-sheet.tsx`) and opened by any link whose href ends in
+`#join` — the header "Join Us" pill, the home hero CTA, the community page
+CTA. Closes on ESC or backdrop; the hash is stripped on close.
+
+**Hero** — Eyebrow `Join Us` · H2 *Indifference* is the only failure. · plus the
+pledge card, four lines read as one breath:
+
+1. I'll show up with something concrete, not just an idea.
+2. I'll let others see my progress — and look at theirs.
+3. I'll value what got done over what got said.
+4. I accept failure. I refuse indifference.
+
+**Titles & stewardships** — H3 Everyone's a *Werker*.
+
+| Title | Layer | What it means |
+|---|---|---|
+| **Werker** | Base title · everyone | Builds the projects, ships the work. Carries a named function on at least one active project and finishes what they take on. Self-claimed. |
+| **Architect** | Stewardship | Holds the frame: principles, scope, methodology. Writes load-bearing decisions down instead of settling them in DMs. Still builds like any Werker. |
+| **Ambassador** | Stewardship | The outward face. Open days, workshops, new people, inbound replies, external rooms. Still builds like any Werker. |
+
+Werker is permanent and universal — the stewardships sit *on top of* it and are
+not a rank above it. They are grown into, not applied for (roughly a year of
+active building for Architect, half that for Ambassador), and existing stewards
+confirm.
+
+**On a project** — a title says how you sit in the org; a role says what you do
+on one project, and it changes project to project.
+
+- **Initiator** — exactly one per project. Brought the idea, owns where it goes.
+- **Function** — one or more per contributor: PM, Developer, Designer,
+  Researcher, PR / Marketing, Operations. Non-exhaustive. No function means
+  watching rather than being on the team.
+
+Closing note: organisations partner with us (co-hosted events, space, long-term
+alignment) — a collaboration, not a member title.
+
+**A short intro** — Eyebrow `A short intro` · H3 Two minutes, *tops*. ·
+ContactForm (see §5).
+
+**Closer** — "Not ready? Just lurk on the newsletter — we'll knock on the door
+again next month."
+
+> Canonical source for this section: `nw-knowledge-base/operations/titles-and-roles.md`
+> (NB-13). If the model changes there, this sheet is the surface that has to
+> follow.
 
 ---
 

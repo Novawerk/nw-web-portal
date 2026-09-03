@@ -23,30 +23,42 @@ const PLEDGE = [
   "I accept failure. I refuse indifference.",
 ];
 
-const ROLES = [
+// Org-level titles. Werker is the permanent base every member holds;
+// Architect and Ambassador are stewardships layered on top of it, not ranks
+// above it. Canonical source: nw-knowledge-base/operations/titles-and-roles.md
+const TITLES = [
   {
     num: "I",
     name: "Werker",
-    tier: "General audience",
-    body: "Join the community, subscribe to the newsletter, and get priority access to upcoming events. Bring the everyday problems you wish someone would fix.",
+    tier: "Base title · everyone",
+    body: "Builds the projects, ships the work. Carries a named function on at least one active project, and finishes what they take on. Self-claimed — join a project with a function and you hold it.",
   },
   {
     num: "II",
-    name: "Ambassador",
-    tier: "Core contributor",
-    body: "Collect signals from the wider world and surface them. Pitch the problems worth solving — and the people we should hear from.",
+    name: "Architect",
+    tier: "Stewardship",
+    body: "Holds the frame: principles, scope, methodology. Writes the load-bearing decisions down where everyone can read them, instead of settling them in DMs. Still builds like any Werker.",
   },
   {
     num: "III",
-    name: "Architect",
-    tier: "Core member",
-    body: "Help shape how the community runs. Service work, build work, governance. Contributions and milestones are logged so the work doesn't disappear.",
+    name: "Ambassador",
+    tier: "Stewardship",
+    body: "The outward face. Runs open days and workshops, brings new people in, answers what lands in the inbox, and represents Novawerk when nobody else is in the room. Still builds like any Werker.",
+  },
+];
+
+// Project-level roles. Independent of title — a Werker can initiate one
+// project and carry a single function on another.
+const PROJECT_ROLES = [
+  {
+    name: "Initiator",
+    meta: "Exactly one per project",
+    body: "Brought the idea and owns where it goes. The answer to “whose project is this?” — a named person, not a committee.",
   },
   {
-    num: "IV",
-    name: "Partner",
-    tier: "Strategic partner",
-    body: "Brands and orgs co-hosting events, providing space, listed in the annual report and media coverage. Long-term alignment, not sponsor logos in a footer.",
+    name: "Function",
+    meta: "One or more per contributor",
+    body: "What you actually do on it: PM, Developer, Designer, Researcher, PR / Marketing, Operations. The list grows as projects need it. No function means you are watching rather than on the team — which is a fine place to start.",
   },
 ];
 
@@ -334,24 +346,31 @@ function RolesSection() {
     <section className="border-b border-border px-6 py-14 md:px-12 md:py-20 lg:px-16">
       <div className="grid gap-10 lg:grid-cols-[1fr_2fr] lg:gap-16">
         <div>
-          <Eyebrow>Four ways to belong</Eyebrow>
+          <Eyebrow>Titles &amp; stewardships</Eyebrow>
           <h3 className="mt-4 font-display text-[clamp(28px,4vw,48px)] font-bold leading-none tracking-[-0.03em]">
-            Pick the layer
+            Everyone&apos;s a
             <br />
             <em className="font-serif font-normal italic text-accent">
-              that fits you
+              Werker
             </em>
             .
           </h3>
           <p className="mt-4 max-w-[36ch] text-sm leading-[1.6] text-foreground/80">
-            Werker → Ambassador → Architect → Partner. You can move between
-            layers freely — most people start at the top of the list and migrate
-            inward when something pulls them in.
+            Werker is the permanent base — the title every member holds. On top
+            of it you can take on a stewardship: Architect holds the frame,
+            Ambassador faces outward. Neither is a rank above Werker. They are
+            more trust, higher expectations, and more of the work nobody
+            assigned you.
+          </p>
+          <p className="mt-5 max-w-[36ch] font-mono text-[11px] uppercase leading-[1.7] tracking-[0.06em] text-mute">
+            ↳ Stewardships are grown into, not applied for. Roughly a year of
+            active building for Architect, half that for Ambassador — and
+            existing stewards confirm.
           </p>
         </div>
 
         <ul className="m-0 list-none border-t border-foreground p-0">
-          {ROLES.map((r) => (
+          {TITLES.map((r) => (
             <li
               key={r.name}
               className="grid grid-cols-[40px_1fr] items-start gap-4 border-b border-border px-1 py-6 transition-[padding] hover:pl-3 sm:grid-cols-[50px_160px_1fr] sm:gap-6 sm:py-7"
@@ -373,6 +392,44 @@ function RolesSection() {
             </li>
           ))}
         </ul>
+      </div>
+
+      <div className="mt-14 border-t border-border pt-10 md:mt-16">
+        <div className="grid gap-8 lg:grid-cols-[1fr_2fr] lg:gap-16">
+          <div>
+            <Eyebrow>On a project</Eyebrow>
+            <p className="mt-4 max-w-[34ch] text-sm leading-[1.6] text-foreground/80">
+              A title says how you sit in the org. A role says what you do on
+              one specific project — and it changes from project to project.
+            </p>
+          </div>
+
+          <dl className="m-0 grid gap-7 sm:grid-cols-2">
+            {PROJECT_ROLES.map((r) => (
+              <div key={r.name} className="border-t border-foreground pt-4">
+                <dt className="font-display text-xl font-semibold tracking-[-0.02em]">
+                  {r.name}
+                </dt>
+                <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.1em] text-mute">
+                  {r.meta}
+                </div>
+                <dd className="m-0 mt-3 text-sm leading-[1.6] text-foreground/80">
+                  {r.body}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+
+        <p className="mt-10 max-w-[72ch] text-sm leading-[1.6] text-foreground/70">
+          Organisations partner with us too — co-hosted events, space, long-term
+          alignment rather than a logo in a footer. That&apos;s a collaboration,
+          not a member title:{" "}
+          <a href="mailto:info@novawerk.io" className="link-underline">
+            info@novawerk.io
+          </a>
+          .
+        </p>
       </div>
     </section>
   );
