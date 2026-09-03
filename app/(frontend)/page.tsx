@@ -60,7 +60,7 @@ const principles = [
   },
   {
     tag: "Principle 03",
-    title: "Responsibility for Change",
+    title: "Responsibility for Positive Change",
     body: "We share the responsibility of making the world a little better. Indifference is the only failure. You don't need to be ready — you just need to start.",
     color: "var(--color-foreground)",
     core: "var(--color-background)",
